@@ -5,4 +5,4 @@ The Eye Care and Vision Working Group for the OHDSI community was formed in 2022
 ## Links
 
 * Website: [https://ohdsi.github.io/EyeCareVisionWG/](https://ohdsi.github.io/EyeCareVisionWG/)
-* GitHub: [https://github.com/OHDSI/EyeCareVisionWG](https://github.com/OHDSI/EyeCareVisionWG)
+* GitHub: [https://github.com/OHDSI/EyeCareVisionWG](https://github.com/OHDSI/EyeCareVisionWG) 

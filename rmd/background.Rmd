@@ -5,6 +5,6 @@ output: html_document
 
 <br>
 
-The Eye Care and Vision Working Group (MI WG) for the OHDSI community was formed in 2022, comprised of vision research scientists and observational health researchers familiar with OMOP CDM. [to be completed]
+The Eye Care and Vision Working Group (MI WG) for the OHDSI community was formed in 2022, comprised of vision research scientists and observational health researchers familiar with OMOP CDM. [to be completed] 
 
 

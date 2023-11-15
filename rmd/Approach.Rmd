@@ -5,5 +5,5 @@ output:
         toc: TRUE
         toc_depth: 3
         toc_float:
-          collapsed: false
+          collapsed: false 
 ---
