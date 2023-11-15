@@ -8,7 +8,7 @@ output:
           collapsed: false
 ---
 
-<br>
+<br> 
 
 ## **Mission**
 
@@ -21,7 +21,9 @@ The OHDSI Eye Care and Vision Working Group aims to increase representation of v
 
 [Eye Care and Vision Working Group 2023 OKR](https://www.ohdsi.org/wp-content/uploads/2023/02/Eye-Care-and-Vision-Research-2023.pdf)
 
-[Github Page](https://github.com/will-0/EyeCareVisionWG)
+[Github Page](https://github.com/OHDSI/EyeCareVisionWG)
+
+[Website](https://ohdsi.github.io/EyeCareVisionWG/)
 
 
 ---
@@ -29,8 +31,6 @@ The OHDSI Eye Care and Vision Working Group aims to increase representation of v
 ## **Get Involved**
 
 We communicate and coordinate through the OHDSI MS Teams environment and Github.
-
-We have working group meeting every 2 weeks at 7 PM ET and 7 AM ET alternatively. We welcome you to join us.
 
 **MS Teams**
 

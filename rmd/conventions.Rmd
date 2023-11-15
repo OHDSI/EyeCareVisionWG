@@ -7,34 +7,10 @@ output:
         toc_float:
           collapsed: false
 ---
-
+ 
 
 Conventions
 
 *TODO: Brief overview of the use and intent of these conventions*
-
----
-
-<br>
-
-# **Diagnostic**
-
-<br>
-
-## <img src="images/green-check.png"></img> Primary Diagnosis
-
-(Placeholder)
-
-test
-<br>
-
----
-
-## **Condition Modifiers**
-
----
-
-#### Overview of Condition Modifiers ####
-
 
 	

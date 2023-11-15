@@ -7,12 +7,5 @@ output:
         toc_float:
           collapsed: false
 ---
-<br>
 
-## **Representation**
-
-<br>
-
-### Diagnosis
-
-preparing to write information
+[to do] 
