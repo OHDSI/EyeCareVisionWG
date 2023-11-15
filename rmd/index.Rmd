@@ -1,0 +1,45 @@
+---
+title: '<div><img src="images/ohdsi40x40.png"></img> OHDSI Eye Care and Vision WG </div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+<br>
+
+## **Mission**
+
+The OHDSI Eye Care and Vision Working Group aims to increase representation of vision data in the OMOP CDM, as well as progress observational research in the vision space using OHDSI tools.
+
+
+---
+
+## **Important links**
+
+[Eye Care and Vision Working Group 2023 OKR](https://www.ohdsi.org/wp-content/uploads/2023/02/Eye-Care-and-Vision-Research-2023.pdf)
+
+[Github Page](https://github.com/will-0/EyeCareVisionWG)
+
+
+---
+
+## **Get Involved**
+
+We communicate and coordinate through the OHDSI MS Teams environment and Github.
+
+We have working group meeting every 2 weeks at 7 PM ET and 7 AM ET alternatively. We welcome you to join us.
+
+**MS Teams**
+
+To join the MS Teams environment you need to complete two steps:
+
+| # | task | link | 
+|:-|:-|:-|
+| 1 | Sign up for an OHDSI Teams Account | [link](https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUQ05MOU9BSzEwOThZVjNQVVFGTDNZRENONiQlQCN0PWcu)|
+| 2 | Register for the workgroup by filling out the specified form selecting the tickbox for "Eye Care and Vision" - which will automatically add you to our channel | [link](https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu)|
+
+
+---
