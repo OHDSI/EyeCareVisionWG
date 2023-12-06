@@ -5,3 +5,4 @@
 azure-functions
 rdflib
 pystardog
+google-api-python-client

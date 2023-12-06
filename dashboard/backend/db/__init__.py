@@ -1,13 +1,18 @@
 from .sparqlep import StardogEndpoint
+from .googlesheets import send_rows_to_googlesheet
 
 ep = StardogEndpoint()
 
 SPARQL_GETALLCONCEPTS = """
-SELECT ?concept_name ?concept_id
+SELECT ?concept_name ?concept_id ?formSpecification
 WHERE {
     ?concept a EyeCareOMOPDashboard:Concept ;
-            EyeCareOMOPDashboard:hasConceptName ?concept_name ;
-            EyeCareOMOPDashboard:hasConceptID ?concept_id .
+        EyeCareOMOPDashboard:hasConceptName ?concept_name ;
+        EyeCareOMOPDashboard:hasConceptID ?concept_id .
+    OPTIONAL {
+        ?concept EyeCareOMOPDashboard:hasJustificationProforma ?justificationProforma .
+        ?justificationProforma rdfs:label ?formSpecification .
+    }
 }
 """
 

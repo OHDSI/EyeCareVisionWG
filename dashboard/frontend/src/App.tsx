@@ -13,8 +13,15 @@ function App() {
     fetch('/api/http_trigger')
     .then(response => response.json())
     .then(data => {
+      const parsed_data = data.map((item: any) => {
+        // Only parse formSpecification if it is present
+        return {
+          ...item,
+          formSpecification: item.formSpecification ? JSON.parse(item.formSpecification) : undefined
+        }
+      })
       dispatch(ContentActions.setContent({
-        data: data
+        data: parsed_data
       }))
     })
   }, [])
