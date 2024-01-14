@@ -1,9 +1,9 @@
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 from typing import List
+from .googleauthkeys import mcreds
 
-# Load credentials from JSON file
-creds = Credentials.from_service_account_file(r"db\eyecarevisionwg-be4533cec9fa.json")
+creds = Credentials.from_service_account_info(mcreds)
 
 # Build the service
 service = build('sheets', 'v4', credentials=creds)
@@ -14,14 +14,7 @@ spreadsheet_id = '11AMsJmJ_BEtSxbMwJXngFQQXF06d4noavfdoPOjC3QU'
 # The A1 notation of the range to update
 range_ = 'Sheet1'  # Example range
 
-# # The values to update
-# values = [
-#     ["Name", "Email", "Date", "Feedback"],  # Example header row
-#     ["John Doe", "john@example.com", "2021-01-01", "Loved it!"]
-#     # More rows can be added here
-# ]
-
-def send_rows_to_googlesheet(rows: List[List[str]]):
+def sendRowsToSheet(rows: List[List[str]]):
 
     body = {
         'values': rows
@@ -36,7 +29,7 @@ def send_rows_to_googlesheet(rows: List[List[str]]):
     print(f"{result.get('updates').get('updatedRows')} rows appended.")
 
 
-def read_rows_from_googlesheet():
+def readRowsFromSheet():
     result = service.spreadsheets().values().get(
         spreadsheetId="1S5vKjLasVvseqxh2vHTGJbmbNLhotSDsubqjWmkdRck", range=range_).execute()
     return result.get('values', [])
