@@ -4,7 +4,7 @@ import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import { FormLabel, Input } from '@mui/material';
+import { FormLabel } from '@mui/material';
 import { ConceptData, FormSpecification } from '@state/content';
 
 const DEFAULT_FORM_QUESTIONS: FormSpecification = [

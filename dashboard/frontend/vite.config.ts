@@ -7,7 +7,8 @@ import { fileURLToPath } from 'url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(( { mode } ) => ({
+  base: mode === 'production' ? '/dashboard/' : '/',
   plugins: [react()],
   server: {
     proxy: {
@@ -24,6 +25,9 @@ export default defineConfig({
       '@components': path.resolve(__dirname, './src/components'),
     },
   },
-})
+  build: {
+    outDir: '../../docs/dashboard'
+  }
+}))
 
 

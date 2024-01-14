@@ -8,6 +8,7 @@ export interface ConceptData {
   concept_id: number;
   concept_name: string;
   formSpecification?: FormSpecification;
+  otherData?: any[];
 }
 
 export interface appContent {
