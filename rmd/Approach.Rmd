@@ -1,9 +1,7 @@
 ---
-title: '<div><img src="images/ohdsi40x40.png"></img>Eye Care and Vision WG Approach</div>'
-output: 
-  html_document:
-        toc: TRUE
-        toc_depth: 3
-        toc_float:
-          collapsed: false 
+output: html_document
 ---
+
+<div id="eyecare-etl-progress-dashboard"></div>
+<script type="module" crossorigin src="/dashboard/assets/index-s-BAPDjP.js"></script>
+<link rel="stylesheet" crossorigin href="/dashboard/assets/index-4S_3pwaO.css">

@@ -10,16 +10,16 @@ navbar:
   title: '<div><img src="images/ohdsi16x16.png"></img> OHDSI Eye Care and Vision WG </div>'
   right:
     - icon: fa-github
-      href: https://github.com/will-0/EyeCareVisionWG
+      href: https://github.com/OHDSI/EyeCareVisionWG
   left:
     - icon: fa-home
       href: index.html
-    - text: " Background"
-      icon: fa-info-circle
-      href: background.html
-#    - text: " Approach"
- #     icon: fa-cogs
-  #    href: Approach.html
+    #- text: " Background"
+    #  icon: fa-info-circle
+    #  href: background.html
+    - text: " Dashboard"
+      icon: fa-cogs
+      href: Approach.html
       # menu:
       #   - text: " Model"
       #     href: model.html
