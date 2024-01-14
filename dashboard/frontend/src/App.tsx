@@ -33,7 +33,7 @@ function App() {
     display: "flex",
     flexDirection: "column" as const,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "start",
     gap: "2em"
   }
 

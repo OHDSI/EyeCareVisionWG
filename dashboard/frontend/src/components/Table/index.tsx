@@ -40,9 +40,9 @@ export default function BasicTable() {
                 {/* <TableCell component="th" scope="row">
                     {index}
                 </TableCell> */}
-                <TableCell style={{width:"20em", overflowX:"auto", paddingRight: "3em"}} align="left"><a href={`https://athena.ohdsi.org/search-terms/terms/${row.concept_id}`} target="_blank">{row.concept_name}</a></TableCell>
+                <TableCell style={{width:"30em", overflowX:"auto", paddingRight: "3em"}} align="left"><a href={`https://athena.ohdsi.org/search-terms/terms/${row.concept_id}`} target="_blank">{row.concept_name}</a></TableCell>
                 <TableCell align="center"><a href={`https://athena.ohdsi.org/search-terms/terms/${row.concept_id}`} target="_blank"><AthenaLogo /></a></TableCell>
-                <TableCell  align="center"><button onClick={() => setWhichModal(index)}>Click</button>{row.otherData ? row.otherData[0] : ""}
+                <TableCell  align="center"><a style={{cursor: "pointer", color: "darkblue"}} onClick={() => setWhichModal(index)}>{row.otherData ? row.otherData[0] : ""}</a>
                     <InstitutionList concept_name={row.concept_name} open={whichModal == index} onClose={() => setWhichModal(-1)} institutions={(row.otherData && row.otherData.length >= 3) ? row.otherData[2].split(";") : []} />
                 </TableCell>
                 {/* <TableCell >{row.otherData ? row.otherData[1] : ""}</TableCell> */}

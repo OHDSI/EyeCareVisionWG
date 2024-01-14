@@ -1,3 +1,3 @@
 export type GeneralState = {
-    exampleStateItem: string | null;
+    fontSize: string;
 }

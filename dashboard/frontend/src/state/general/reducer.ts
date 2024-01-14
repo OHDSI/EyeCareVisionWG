@@ -7,8 +7,8 @@ const generalStateSlice = createSlice({
   name: 'general',
   initialState,
   reducers: {
-    setExampleStateItem(state, action: PayloadAction<string>) {
-      state.exampleStateItem = action.payload
+    setfontSize(state, action: PayloadAction<string>) {
+      state.fontSize = action.payload
     },
     reset() {
       return {

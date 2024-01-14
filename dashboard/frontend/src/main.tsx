@@ -2,16 +2,24 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
-import './index.css'
+// import './index.css'
+import { createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  typography: {
+    fontSize: 24, // Base font size; adjust as needed
+  },
+});
 
 import store from './state'
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("eyecare-etl-progress-dashboard")!).render(
   <React.StrictMode>
     <Provider store={store}>
-      <h1>Example application!</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, nunc nisl aliquet nunc, eget aliquam nisl nunc eget nisl. Donec euismod, nisl eget ultricies aliquam, nunc nisl aliquet nunc, eget aliquam nisl nunc eget nisl. </p>
-      <App />
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>,
 )

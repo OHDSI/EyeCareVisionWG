@@ -1,7 +1,7 @@
 import { GeneralState } from './types'
 
 const initialState: GeneralState = {
-    exampleStateItem: null
+    fontSize: "1.2em"
 }
 
 export default initialState
