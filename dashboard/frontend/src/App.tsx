@@ -39,8 +39,12 @@ function App() {
 
   return (
     <div style={layout_style}>
+      <div style={{display: "flex", flexDirection: "row", gap: "1em"}}>
+        <RequestButton concept_id={-1} concept_name="Get involved"/>
+        <RequestButton concept_id={-1} concept_name="Enquire about data access"/>
+        <RequestButton concept_id={-1} concept_name="Request new code"/>
+      </div>
       <Table />
-      <RequestButton concept_id={-1} concept_name="Request new code"/>
     </div>
   );
   

@@ -17,7 +17,7 @@ export default function RequestButton(props: ConceptData) {
   return (
     <div>
       <Button variant="contained" onClick={handleClickOpen}>
-        Request additional code
+        {props.concept_name}
       </Button>
       <SurveyDialog
         open={open}

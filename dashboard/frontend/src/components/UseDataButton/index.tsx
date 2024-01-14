@@ -1,11 +1,9 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import SurveyDialog from '@components/DialogBox';
 import { ConceptData } from '@state/content';
 
-export default function VoteButton(props: ConceptData) {
+export default function RequestButton(props: ConceptData) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -18,9 +16,9 @@ export default function VoteButton(props: ConceptData) {
 
   return (
     <div>
-      <IconButton aria-label='Request' color="primary" onClick={handleClickOpen}>
-        <AddCircleIcon />
-      </IconButton>
+      <Button variant="contained" onClick={handleClickOpen}>
+        Request additional code
+      </Button>
       <SurveyDialog
         open={open}
         onClose={handleClose}
