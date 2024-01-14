@@ -7,6 +7,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import AthenaLogo from '../AthenaLogo'
 import InstitutionList from '../InstitutionList'
+import { CircularProgress } from '@mui/material';
 
 import { useSelector } from 'react-redux'
 import { ContentSelectors, ConceptData } from '@state/content';
@@ -17,6 +18,10 @@ import React from 'react';
 export default function BasicTable() {
     const concepts = useSelector(ContentSelectors.selectContent).data as ConceptData[]
     const [whichModal, setWhichModal] = React.useState(-1);
+
+    if (concepts.length == 0) {
+        return <CircularProgress />
+    }
 
     return (
         <TableContainer style={{ width: 'auto'}} component={Paper}>

@@ -11,17 +11,10 @@ const DEFAULT_FORM_QUESTIONS: FormSpecification = [
     {
         type: "TextField",
         label: {
-            text: "Why this concept?",
-            subtext: "Please indicate how it would be used for observational research."
+            text: "Comment",
+            subtext: "If you'd like to register interest in this data being available, please indicate how it would be used for observational research."
         }
-    },
-    {
-        type: "TextField",
-        label: {
-            text: "Additional Specificity",
-            subtext: "For example: 'laterality', for eye-specific data."
-        }
-    },
+    }
 ]
 
 
@@ -76,7 +69,7 @@ export default function SurveyDialog(props: SimpleDialogProps) {
 
         // Step 4: Make an API Request
         // Replace 'your-api-endpoint' with your actual API endpoint
-        fetch('/api/submit_vote', {
+        fetch(`${import.meta.env.VITE_API_BASE_URL}/api/submit_vote`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -120,7 +113,10 @@ export default function SurveyDialog(props: SimpleDialogProps) {
                     }
                 })}
             </FormControl>
-            <Button type="submit" variant="contained">Submit</Button>
+            <div style={{display: "flex", flexDirection: "row", justifyContent: "start", gap: "1em", width: "100%"}}>
+                <Button type="submit" variant="contained">Submit</Button>
+                <Button variant="outlined" onClick={handleClose}>Cancel</Button>
+            </div>
             </form>
         </Box>
     </Dialog>
