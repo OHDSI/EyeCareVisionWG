@@ -1,5 +1,5 @@
 from .sparqlep import StardogEndpoint
-from .googlesheets import send_rows_to_googlesheet
+from .googlesheets import send_rows_to_googlesheet,  read_rows_from_googlesheet
 
 ep = StardogEndpoint()
 

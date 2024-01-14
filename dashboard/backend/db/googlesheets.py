@@ -34,3 +34,9 @@ def send_rows_to_googlesheet(rows: List[List[str]]):
         insertDataOption='INSERT_ROWS').execute()
 
     print(f"{result.get('updates').get('updatedRows')} rows appended.")
+
+
+def read_rows_from_googlesheet():
+    result = service.spreadsheets().values().get(
+        spreadsheetId="1S5vKjLasVvseqxh2vHTGJbmbNLhotSDsubqjWmkdRck", range=range_).execute()
+    return result.get('values', [])
