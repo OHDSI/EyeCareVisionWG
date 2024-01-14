@@ -6,14 +6,17 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import AthenaLogo from '../AthenaLogo'
+import InstitutionList from '../InstitutionList'
 
 import { useSelector } from 'react-redux'
 import { ContentSelectors, ConceptData } from '@state/content';
 
 import VoteButton from '@components/VoteButton';
+import React from 'react';
 
 export default function BasicTable() {
     const concepts = useSelector(ContentSelectors.selectContent).data as ConceptData[]
+    const [whichModal, setWhichModal] = React.useState(-1);
 
     return (
         <TableContainer style={{ width: 'auto'}} component={Paper}>
@@ -39,7 +42,9 @@ export default function BasicTable() {
                 </TableCell> */}
                 <TableCell style={{width:"20em", overflowX:"auto", paddingRight: "3em"}} align="left"><a href={`https://athena.ohdsi.org/search-terms/terms/${row.concept_id}`} target="_blank">{row.concept_name}</a></TableCell>
                 <TableCell align="center"><a href={`https://athena.ohdsi.org/search-terms/terms/${row.concept_id}`} target="_blank"><AthenaLogo /></a></TableCell>
-                <TableCell  align="center">{row.otherData ? row.otherData[0] : ""}</TableCell>
+                <TableCell  align="center"><button onClick={() => setWhichModal(index)}>Click</button>{row.otherData ? row.otherData[0] : ""}
+                    <InstitutionList concept_name={row.concept_name} open={whichModal == index} onClose={() => setWhichModal(-1)} institutions={(row.otherData && row.otherData.length >= 3) ? row.otherData[2].split(";") : []} />
+                </TableCell>
                 {/* <TableCell >{row.otherData ? row.otherData[1] : ""}</TableCell> */}
                 <TableCell align="center"><VoteButton concept_id={row.concept_id} concept_name={row.concept_name} formSpecification={row.formSpecification} /></TableCell>
                 </TableRow>
