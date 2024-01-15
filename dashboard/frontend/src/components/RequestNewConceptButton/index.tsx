@@ -14,20 +14,20 @@ const USE_DATA_FORM: FormSpecification = [
   {
       type: "TextField",
       label: {
-          text: "Research Project",
-          subtext: "For what research purpose would you like to use this data?"
+          text: "What new concept would you like included?",
+          subtext: "This should be something specific, that would fit into the OMOP CDM model. Ideally, you would provide a concept ID acquired using the Athena tool (https://athena.ohdsi.org/search-terms/start)"
       }
   },
   {
     type: "TextField",
     label: {
-        text: "Other information",
-        subtext: "Anything else you'd like to add."
+        text: "Justification",
+        subtext: "Why you want it included. What research question would it help you answer?"
     }
 }
 ]
 
-export default function UseDataButton() {
+export default function RequestNewConceptButton() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -40,14 +40,14 @@ export default function UseDataButton() {
 
   const conceptData: ConceptData = {
     concept_id: 0,
-    concept_name: "Enquire about using data network",
+    concept_name: "Request New Concept",
     formSpecification: USE_DATA_FORM
   }
 
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Data Use
+        Request new concept
       </Button>
       <SurveyDialog
         open={open}

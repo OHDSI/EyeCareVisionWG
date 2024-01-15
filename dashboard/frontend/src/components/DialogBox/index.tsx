@@ -91,7 +91,7 @@ export default function SurveyDialog(props: SimpleDialogProps) {
     return (
     <Dialog onClose={handleClose} open={open}>
         <Box style={style}>
-        <DialogTitle><Button size="large" target="_blank" href={`https://athena.ohdsi.org/search-terms/terms/${voteProps.concept_id}`}>{voteProps.concept_name}</Button></DialogTitle>
+        <DialogTitle style={{textAlign: "center"}} >{voteProps.concept_name}</DialogTitle>
             <form onSubmit={handleSubmit}>
             <FormControl style={{marginBottom: "2em", width: "100%", display:"flex", flexDirection:"column", alignItems:"start"}}>
                 {formSpecification.map((question, index) => {
