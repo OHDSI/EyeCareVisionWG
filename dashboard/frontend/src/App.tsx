@@ -5,6 +5,7 @@ import { ContentActions } from '@state/content'
 
 import UseDataButton from '@components/UseDataButton'
 import GetInvolvedButton from '@components/GetInvolvedButton'
+import RequestNewConceptButton from '@components/RequestNewConceptButton'
 import Table from '@components/Table'
 
 function App() {
@@ -40,9 +41,19 @@ function App() {
 
   return (
     <div style={layout_style}>
+      <div>
+        <h1>Ophthalmology Concept ETL Dashboard</h1>
+        <p>
+          The dashboard aims to provide a central location for tracking inclusion of ophthalmology data into the OMOP ETLs. It reports the number of institutions that have ETL'd data for this concept into their active OMOP instance (click to see which ones). 
+        </p>
+        <p>
+          Please help us prioritize elements by commenting on ones you think are important, or clicking "Request New Concept" if the data you'd like to see isn't listed. 
+        </p>
+      </div>
       <div style={{display: "flex", flexDirection: "row", gap: "1em"}}>
-        <GetInvolvedButton />
+        <RequestNewConceptButton />
         <UseDataButton />
+        <GetInvolvedButton />
       </div>
       <Table />
     </div>

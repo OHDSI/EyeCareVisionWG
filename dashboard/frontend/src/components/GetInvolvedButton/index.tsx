@@ -27,7 +27,7 @@ export default function GetInvolvedButton() {
 
   return (
     <div>
-      <Button variant="contained" onClick={handleClickOpen}>
+      <Button variant="outlined" onClick={handleClickOpen}>
         Get Involved
       </Button>
       <Dialog onClose={handleClose} open={open}>
@@ -38,7 +38,7 @@ export default function GetInvolvedButton() {
               If you'd like to get involved in wider efforts around getting ophthalmology data transformed into the OMOP standard, please see the <a href="https://ohdsi.github.io/EyeCareVisionWG/index.html">home page</a> of this site for details on joining.
             </p>
             <p>
-              However, if you have questions about ETL efforts specifically, please contact either Michelle Hribar <a href="mailto:hribarm@ohsu.edu">hribarm@ohsu.edu</a> or Will Halfpenny <a href="mailto:whalfpenny@health.ucsd.edu">whalfpenny@health.ucsd.edu</a>.
+              However, if you have questions about ETL efforts specifically, please contact either Michelle Hribar (hribarm[at]ohsu.edu) or Will Halfpenny (whalfpenny[at]health.ucsd.edu).
             </p>
           </DialogContent>
         </Box>
