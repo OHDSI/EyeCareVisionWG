@@ -1,5 +1,6 @@
 # Custom
 .vscode/
+*.code-workspace
 
 # History files
 .Rhistory
