@@ -1,0 +1,5 @@
+#etl-resources-link:hover {
+    fill: rgb(121, 119, 119);
+    transition: fill 0.1s ease;
+    cursor: pointer;
+}

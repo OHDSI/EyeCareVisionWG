@@ -1,1 +1,0 @@
-This folder will contain shareable mappings for ophthalmology concepts.
