@@ -15,4 +15,4 @@ Certain EHR vendors, such as EPIC, do not permit sharing of mappings files to no
 ### EPIC
 
 * Kaleidoscope→OMOP concept mappings: [https://userweb.epic.com/Thread/128570/Kaleidoscope-to-OMOP-mappings/](https://userweb.epic.com/Thread/128570/Kaleidoscope-to-OMOP-mappings/)
-
+* Demonstration of IOP ETL (from Stanford): [https://userweb.epic.com/Thread/129255/Demonstration-of-an-IOP-ETL-Implementation-Stanford/](https://userweb.epic.com/Thread/129255/Demonstration-of-an-IOP-ETL-Implementation-Stanford/)
