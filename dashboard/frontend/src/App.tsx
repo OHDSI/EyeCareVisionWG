@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { ContentActions } from '@state/content'
 
 import UseDataButton from '@components/UseDataButton'
-import GetInvolvedButton from '@components/GetInvolvedButton'
+import ShareProgressButton from '@components/ShareProgressButton'
 import RequestNewConceptButton from '@components/RequestNewConceptButton'
 import Table from '@components/Table'
 
@@ -50,10 +50,10 @@ function App() {
           Please help us prioritize elements by commenting on ones you think are important, or clicking "Request New Concept" if the data you'd like to see isn't listed. 
         </p>
       </div>
-      <div style={{display: "flex", flexDirection: "row", gap: "1em"}}>
-        <RequestNewConceptButton />
+      <div style={{display: "flex", flexDirection: "row", gap: "2.5em"}}>
+        <ShareProgressButton />
         <UseDataButton />
-        <GetInvolvedButton />
+        <RequestNewConceptButton />
       </div>
       <Table />
     </div>

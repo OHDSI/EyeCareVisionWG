@@ -3,31 +3,31 @@ import Button from '@mui/material/Button';
 import SurveyDialog from '@components/DialogBox';
 import { ConceptData, FormSpecification } from '@state/content';
 
-const USE_DATA_FORM: FormSpecification = [
+const SHARE_PROGRESS_FORM: FormSpecification = [
   {
       type: "TextField",
       label: {
           text: "Personal Details",
-          subtext: "Name, position, institution, email address, etc."
+          subtext: "Please include your name, position, institution and email address. We will get in touch to clarify any information, and double-check that you're happy for us to share your progress."
       }
   },
   {
       type: "TextField",
       label: {
-          text: "What new concept would you like included?",
-          subtext: "This should be something specific, that would fit into the OMOP CDM model. Ideally, you would provide a concept ID acquired using the Athena tool (https://athena.ohdsi.org/search-terms/start)"
+          text: "ETL Progress",
+          subtext: "Please detail which concepts you have transformed to OMOP, or are currently working on."
       }
   },
   {
     type: "TextField",
     label: {
-        text: "Justification",
-        subtext: "Why you want it included. What research question would it help you answer?"
+        text: "Other information",
+        subtext: "Anything else you'd like to add. "
     }
 }
 ]
 
-export default function RequestNewConceptButton() {
+export default function ShareProgressButton() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -40,14 +40,14 @@ export default function RequestNewConceptButton() {
 
   const conceptData: ConceptData = {
     concept_id: 0,
-    concept_name: "Request New Concept",
-    formSpecification: USE_DATA_FORM
+    concept_name: "Enquire about using data network",
+    formSpecification: SHARE_PROGRESS_FORM
   }
 
   return (
     <div>
-      <Button color="secondary" style={{maxWidth: "15em"}} variant="outlined" onClick={handleClickOpen}>
-        Request inclusion of a concept
+      <Button color="success" style={{maxWidth: "15em"}} variant="outlined" onClick={handleClickOpen}>
+        Share institution progress
       </Button>
       <SurveyDialog
         open={open}

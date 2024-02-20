@@ -46,8 +46,8 @@ export default function UseDataButton() {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Data Use
+      <Button style={{maxWidth: "15em"}} variant="outlined" onClick={handleClickOpen}>
+        Use data network for research
       </Button>
       <SurveyDialog
         open={open}
