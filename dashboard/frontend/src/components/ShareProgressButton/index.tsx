@@ -40,7 +40,7 @@ export default function ShareProgressButton() {
 
   const conceptData: ConceptData = {
     concept_id: 0,
-    concept_name: "Enquire about using data network",
+    concept_name: "Share your institutional progress",
     formSpecification: SHARE_PROGRESS_FORM
   }
 

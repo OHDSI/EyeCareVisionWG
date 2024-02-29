@@ -33,7 +33,8 @@ export default function BasicTable() {
                 <TableCell align="left">Concept</TableCell>
                 <TableCell align="center">Athena Link</TableCell>
                 <TableCell align="center">ETL Resources</TableCell>
-                <TableCell align="center">Institutions</TableCell>
+                <TableCell align="center">Institutions (complete)</TableCell>
+                <TableCell align="center">Institutions<br></br>(in progress)</TableCell>
                 <TableCell align="center">Comment</TableCell>
             </TableRow>
             </TableHead>
@@ -59,6 +60,9 @@ export default function BasicTable() {
                 }  
                 <TableCell  align="center"><a style={{cursor: "pointer", color: "darkblue"}} onClick={() => setWhichModal(index)}>{row.otherData ? row.otherData[0] : ""}</a>
                     <InstitutionList concept_name={row.concept_name} open={whichModal == index} onClose={() => setWhichModal(-1)} institutions={(row.otherData && row.otherData.length >= 3) ? row.otherData[2].split(";") : []} />
+                </TableCell>
+                <TableCell style={{width:'10em'}} align="center"><a style={{cursor: "pointer", color: "darkblue"}} onClick={() => setWhichModal(index)}>{row.otherData ? row.otherData[1] : ""}</a>
+                    <InstitutionList concept_name={row.concept_name} open={whichModal == index} onClose={() => setWhichModal(-1)} institutions={(row.otherData && row.otherData.length >= 5) ? row.otherData[4].split(";") : []} />
                 </TableCell>
                 <TableCell align="center"><VoteButton concept_id={row.concept_id} concept_name={row.concept_name} formSpecification={row.formSpecification} /></TableCell>
                 </TableRow>
