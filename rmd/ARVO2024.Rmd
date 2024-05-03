@@ -22,6 +22,9 @@ The Eye Care and Vision Research Working Group in the [Observational Health Data
 + [Summary of First Year Accomplishments](https://www.ohdsi.org/2023showcase-510/)
 + [Overview of Data Standards in Eye Care]( https://eyewiki.org/Data_Standards_in_Eye_Care)
 
+<br>
+We need a new meeting time!  Fill out our [poll](https://www.when2meet.com/?24887613-nv37a). *Note: all times are Eastern Time.*
+
 ---
 
 ## **Meeting Agenda**
@@ -43,7 +46,7 @@ The Eye Care and Vision Research Working Group in the [Observational Health Data
 [Imaging Google Doc Link](https://docs.google.com/document/d/1HYZsTDA0hZajYqswC1Izn1Hq1T3pMMjSsCt_aXJNZhc/edit?usp=sharing)
 
 #### Background
-The OHDSI Medical Imaging Workgroup has released a reference standard for integrating imaging into the OMOP common data model (see publication below).  They have been working an a pilot study converting an existing Alzheimer's disease dataset with MR imaging into OMOP as a proof of concept.
+The OHDSI Medical Imaging Workgroup has released a reference standard for integrating imaging into the OMOP common data model (see publication below).  They have been working a pilot study converting an existing Alzheimer's disease dataset with MR imaging into OMOP as a proof of concept.
 <p> The imaging subgroup of the Eye Care and Vision Research Workgroup has been focused on ophthalmic imaging integration, specifically looking at the metadata and measurements that could be stored as imaging features in OMOP datamarts.  We need guidance for the bigger picture of imaging integration into OMOP datamarts and for making the imaging data available for research and federated learning.
 
   + [OHDSI Reference Standard for Imaging Integration](https://link.springer.com/article/10.1007/s10278-024-00982-6)
