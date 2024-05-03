@@ -1,0 +1,144 @@
+---
+title: '<div><img src="images/ohdsi40x40.png"></img> OHDSI Eye Care and Vision Research Working Group </div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+<div align="center"> **In Person Meeting ARVO 2024 ** </div> 
+<div align="center"> **May 7, 2024 ** </div> 
+<div align="center"> 6:30 pm – 9:00 pm </div> 
+<div align="center"> UW Medicine Karalis Johnson Retina Center at South Lake Union </div> 
+<div align="center"> 750 Republican St building F, Seattle, WA 98109 </div> 
+<div align="center"> Rm F106 </div> 
+
+<br>
+The Eye Care and Vision Research Working Group in the [Observational Health Data Sciences and Informatics (OHDSI) community](ohdsi.org) aims to improve standardization and representation of ophthalmic data in the [OMOP Common Data Model](https://www.ohdsi.org/data-standardization/).  The working group was formed in May, 2022 and meets monthly. For more info, see: 
+
++ [Eye Care and Vision Working Group 2024 OKR](https://www.ohdsi.org/wp-content/uploads/2024/02/Eyecare-24.pdf)
++ [Summary of First Year Accomplishments](https://www.ohdsi.org/2023showcase-510/)
++ [Overview of Data Standards in Eye Care]( https://eyewiki.org/Data_Standards_in_Eye_Care)
+
+---
+
+## **Meeting Agenda**
+
+| Time | Activity |
+| ---- | -------- |
+| 6:30 pm – 7:30 pm | Welcome reception with food.  Contributions requested to cover the cost of the food.| 
+| 7:00 pm – 7:05 pm | Introductions |
+| 7:05 pm – 7:30 pm | Overview of OHDSI Eye Care and Vision Research Workgroup | 
+| 7:30 pm – 8:15 pm	| Breakout Discussions: Imaging, Network Study Ideas, Grant planning |
+| 8:15 pm – 8:45 pm |	Reports from breakouts & discussion |
+| 8:45 pm – 9:00 pm	| Wrap up and next steps |
+
+---
+
+## **Breakout Discussions** 
+
+### 1. Imaging 
+[Imaging Google Doc Link](https://docs.google.com/document/d/1HYZsTDA0hZajYqswC1Izn1Hq1T3pMMjSsCt_aXJNZhc/edit?usp=sharing)
+
+#### Background
+The OHDSI Medical Imaging Workgroup has released a reference standard for integrating imaging into the OMOP common data model (see publication below).  They have been working an a pilot study converting an existing Alzheimer's disease dataset with MR imaging into OMOP as a proof of concept.
+<p> The imaging subgroup of the Eye Care and Vision Research Workgroup has been focused on ophthalmic imaging integration, specifically looking at the metadata and measurements that could be stored as imaging features in OMOP datamarts.  We need guidance for the bigger picture of imaging integration into OMOP datamarts and for making the imaging data available for research and federated learning.
+
+  + [OHDSI Reference Standard for Imaging Integration](https://link.springer.com/article/10.1007/s10278-024-00982-6)
+
+
+#### Discussion Ideas
+  + Barriers to imaging harmonization
+  + Tools needed for using images in network studies
+  + Resources for extracting imaging metadata and measurements at scale
+  + Pilot studies using existing ophthalmic datasets
+
+#### Action Items
+  + List of challenges for OMOP ophthalmic image integration & harmonization
+  + List of tools needed to use ophthalmic images in network studies or federated learning studies
+  + List of ophthalmic imaging datasets that could be converted to OMOP
+  + Group(s) of collaborators and next steps
+
+
+### 2. Network Study Ideas
+
+[Network Study Ideas Google Doc Link](https://docs.google.com/document/d/1Ljd-eP1vh_RXsV0gaajdArW-S_F0mHbDDqBFM5OeMn0/edit?usp=sharing)
+
+#### Background
+
+OHDSI network studies use observational health data stored in the OMOP common data model across multiple sites and/or databases.  The OHDSI community provides a suite of tools to help with every step of this process.  Cindy Cai MD, MS lead the first network study in our Eye Care and Vision Research workgroup last year as part of the OHDSI SOS Challenge.  It was a tremendous way to demonstrate the power of standardized data and analysis tools for completing a study in a short amount of time (9 weeks) over a large amount of data (12 databases with 485 patients combined).
+
+<p> Our community would like to start more network studies and we need your ideas for which one(s) to tackle next!
+
+  + [Steps for a Network Study](https://ohdsi.github.io/TheBookOfOhdsi/StudySteps.html#study-steps-in-detail)
+  + [First ECAVR Network Study: Comparative Risk of Kidney Injury after anti-VEGF injections](https://pubmed.ncbi.nlm.nih.gov/38519026/)
+  + [Ongoing OHDSI Studies](https://data.ohdsi.org/OhdsiStudies/)
+    
+#### Discussion Ideas
+  
+  + Existing clinical studies that can be repeated using observational health data
+  + Prevalence of disorders or adverse treatment effects
+  + Comparative effectiveness of treatments
+
+#### Action Items
+  
+  + Lists of network study ideas using vanilla OMOP, vanilla OMOP + eye exam data, & vanilla OMOP + eye exam data + imaging
+  + Lists of phenotypes needed
+  + Group(s) of collaborators & next steps
+
+### 3. Grant Planning
+
+[Grant Planning Google Doc Link](https://docs.google.com/document/d/19GQj0sT32uFvDTYRVIRUiZ7h43qLm9KmcpuCEyVmbR4/edit)
+
+#### Background 
+Long-term sustainability of the workgroup is a concern if based entirely on voluntary effort.
+The goal of this breakout session is to discuss needs for funding, identify potential funding mechanisms, and make plans for action items to pursue funding opportunities of highest yield to the work group.
+
+#### Discussion Ideas
+
++ Possible applications of funding support:
+  * Support ETL efforts at individual institutions 
+  * Clinicians / domain experts
+  * Analysts/IT staff 
+  * Website development/maintenance for coordinating data network
+  * Data network coordinating center?
+  * Project management support 
++ Possible funding sources: 
+  * NIH
+  * PCORI 
+  * Foundation grants 
+
+#### Action Items
+
++ Identify funding mechanism(s) to target
++ Identify interested parties 
++ Develop timeline for submission 
+
+---
+
+## **Important links**
+
+[Github Page](https://github.com/OHDSI/EyeCareVisionWG)
+
+[Website](https://ohdsi.github.io/EyeCareVisionWG/)
+
+
+---
+
+## **Get Involved**
+
+We communicate and coordinate through the OHDSI MS Teams environment and Github.
+
+**MS Teams**
+
+To join the MS Teams environment you need to complete two steps:
+
+| # | task | link | 
+|:-|:-|:-|
+| 1 | Sign up for an OHDSI Teams Account | [link](https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUQ05MOU9BSzEwOThZVjNQVVFGTDNZRENONiQlQCN0PWcu)|
+| 2 | Register for the workgroup by filling out the specified form selecting the tickbox for "Eye Care and Vision" - which will automatically add you to our channel | [link](https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu)|
+
+
+---

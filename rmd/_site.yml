@@ -17,9 +17,12 @@ navbar:
     #- text: " Background"
     #  icon: fa-info-circle
     #  href: background.html
-    - text: " Dashboard"
+    - text: "Dashboard"
       icon: fa-cogs
       href: Approach.html
+    - text: "ARVO2024"
+      icon: fa-calendar-days
+      href: ARVO2024.html
       # menu:
       #   - text: " Model"
       #     href: model.html
