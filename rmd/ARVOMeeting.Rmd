@@ -1,5 +1,5 @@
 ---
-title: '<div><img src="images/ohdsi40x40.png"></img> OHDSI Eye Care and Vision Research Working Group </div>'
+title: '<div><img src="images/ohdsi40x40.png"></img> OHDSI Eye Care and Vision Research Working Group</div>'
 output:
    html_document:
         toc: TRUE
@@ -39,9 +39,8 @@ We need a new meeting time!  Fill out our [poll](https://www.when2meet.com/?2488
 | 8:45 pm – 9:00 pm	| Wrap up and next steps |
 
 ---
-
 ## **Overview**
-[Slides](ARVOInPerson5_7_24.pdf)
+[Slides](../slides/ARVOInPerson5_7_24.pdf)
 
 ## **Breakout Discussions** 
 
