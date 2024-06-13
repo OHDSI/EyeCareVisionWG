@@ -4,7 +4,7 @@
 ## Agenda
 1. **Announcements**
    - New meeting time for workgroup: Second Thursdays, 6:00 pm ET/3:00 pm PT
-    -  [OHDSI Global Symposium](https://www.ohdsi.org/ohdsi2024/) is Oct. 22 - 24, 2024.  Registration and hotel reservatiions are now open. Submissions to collaborator's showcase are due June 21, 2024.
+    -  [OHDSI Global Symposium](https://www.ohdsi.org/ohdsi2024/) is Oct. 22 - 24, 2024.  Registration and hotel reservations are now open. Submissions to collaborator's showcase are due June 21, 2024.
     -  Next ETL Subgroup meeting is June 17th at 8pm ET/5pm PT
     -  Next Imaging Subgroup meeting is July 11th at 10:am ET/7:00 am PT
 2. **Goal setting for workgroup**
