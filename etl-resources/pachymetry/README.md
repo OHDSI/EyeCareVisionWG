@@ -1,4 +1,4 @@
-# Optic C:D Ratio
+# Pachymetry (central corneal thickness)
 
 These mappings were initially set to the SNOMED codes 44807415 and 44807414. However, implementers should be aware that the UC System decided to switch these to the LOINC equivalents:
 
