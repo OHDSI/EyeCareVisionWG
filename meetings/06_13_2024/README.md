@@ -1,5 +1,6 @@
 # Eye Care and Vision Research Workgroup Meeting 06/13/2024
 # Theme: Goal Setting & Engagement
+[Slides](docs/Meeting_6_13_24.pdf)
 
 ## Agenda
 1. **Announcements**
