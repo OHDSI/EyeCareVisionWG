@@ -38,6 +38,6 @@
           - NAION risk for semaglutide users
           - One that uses IOP
       - Eye related flowsheet concept mapping
-4. **Next Meeting: Move to Aug 1 or Aug 15th?**
+4. **Next Meeting: Move to Aug 1st at 6:00 pm ET**
 
 
