@@ -1,121 +1,121 @@
-Category	EHR Entry	Snellen Equivalent (for reference only, not to be used as part of the conversion)	LogMAR	value_as_concept_id
-Jaeger	J1+	20/15	-0.12	37017022
-	J1	20/20	0	4126536
-	J2	20/25	0.1	4125414
-	J3	20/30	0.18	46273339
-	J4	20/32	0.2	4126537
-	J5	20/40	0.3	46274009
-	J6	20/50	0.4	4126538
-	J7	20/60	0.48	46273340
-	J8	20/63	0.5	4125415
-	J9	20/80	0.6	46273342
-	J10	20/100	0.7	4123481
-	J11	20/114	0.76	46273344
-	J12	20/125	0.8	4128621
-	J13	20/160	0.9	46273345
-	J14	20/200	1	4125413
-Low vision	CF	NULL	1.9	36308523
-	HM	NULL	2.3	36309751
-	LP	NULL	2.7	36309496
-	NLP	NULL	4	36307763
-ETDRS Letter score	0 letters	NULL	NULL	
-	1 letters		1.68	
-	2 letters		1.66	
-	3 letters		1.64	
-	4 letters		1.62	
-	5 letters	20/800	1.6	
-	6 letters		1.58	
-	7 letters		1.56	
-	8 letters		1.54	
-	9 letters		1.52	
-	10 letters	20/640	1.5	
-	11 letters		1.48	
-	12 letters		1.46	
-	13 letters		1.44	
-	14 letters		1.42	
-	15 letters	20/500	1.4	
-	16 letters		1.38	
-	17 letters		1.36	
-	18 letters		1.34	
-	19 letters		1.32	
-	20 letters	20/400	1.3	
-	21 letters		1.28	
-	22 letters		1.26	
-	23 letters		1.24	
-	24 letters		1.22	
-	25 letters	20/320	1.2	
-	26 letters		1.18	
-	27 letters		1.16	
-	28 letters		1.14	
-	29 letters		1.12	
-	30 letters	20/250	1.1	
-	31 letters		1.08	
-	32 letters		1.06	
-	33 letters		1.04	
-	34 letters		1.02	
-	35 letters	20/200	1	
-	36 letters		0.98	
-	37 letters		0.96	
-	38 letters		0.94	
-	39 letters		0.92	
-	40 letters	20/160	0.9	
-	41 letters		0.88	
-	42 letters		0.86	
-	43 letters		0.84	
-	44 letters		0.82	
-	45 letters	20/125	0.8	
-	46 letters		0.78	
-	47 letters		0.76	
-	48 letters		0.74	
-	49 letters		0.72	
-	50 letters	20/100	0.7	
-	51 letters		0.68	
-	52 letters		0.66	
-	53 letters		0.64	
-	54 letters		0.62	
-	55 letters	20/80	0.6	
-	56 letters		0.58	
-	57 letters		0.56	
-	58 letters		0.54	
-	59 letters		0.52	
-	60 letters	20/63	0.5	
-	61 letters		0.48	
-	62 letters		0.46	
-	63 letters		0.44	
-	64 letters		0.42	
-	65 letters	20/50	0.4	
-	66 letters		0.38	
-	67 letters		0.36	
-	68 letters		0.34	
-	69 letters		0.32	
-	70 letters	20/40	0.3	
-	71 letters		0.28	
-	72 letters		0.26	
-	73 letters		0.24	
-	74 letters		0.22	
-	75 letters	20/32	0.2	
-	76 letters		0.18	
-	77 letters		0.16	
-	78 letters		0.14	
-	79 letters		0.12	
-	80 letters	20/25	0.1	
-	81 letters		0.08	
-	82 letters		0.06	
-	83 letters		0.04	
-	84 letters		0.02	
-	85 letters	20/20	0	
-	86 letters		-0.02	
-	87 letters		-0.04	
-	88 letters		-0.06	
-	89 letters		-0.08	
-	90 letters	20/15	-0.1	
-	91 letters		-0.12	
-	92 letters		-0.14	
-	93 letters		-0.16	
-	94 letters		-0.18	
-	95 letters	20/12	-0.2	
-	96 letters		-0.22	
-	97 letters		-0.24	
-	98 letters		-0.26	
-	99 letters		-0.28	
-	100 letters	20/10	-0.3	
+Category,EHR Entry,Snellen Equivalent (for reference only not to be used as part of the conversion),LogMAR,value_as_concept_id
+Jaeger,J1+,20/15,-0.12,37017022
+"",J1,20/20,0,4126536
+"",J2,20/25,0.1,4125414
+"",J3,20/30,0.18,46273339
+"",J4,20/32,0.2,4126537
+"",J5,20/40,0.3,46274009
+"",J6,20/50,0.4,4126538
+"",J7,20/60,0.48,46273340
+"",J8,20/63,0.5,4125415
+"",J9,20/80,0.6,46273342
+"",J10,20/100,0.7,4123481
+"",J11,20/114,0.76,46273344
+"",J12,20/125,0.8,4128621
+"",J13,20/160,0.9,46273345
+"",J14,20/200,1,4125413
+Low vision,CF,NULL,1.9,36308523
+"",HM,NULL,2.3,36309751
+"",LP,NULL,2.7,36309496
+"",NLP,NULL,4,36307763
+ETDRS Letter score,0 letters,NULL,NULL,""
+"",1 letters,"",1.68,""
+"",2 letters,"",1.66,""
+"",3 letters,"",1.64,""
+"",4 letters,"",1.62,""
+"",5 letters,20/800,1.6,""
+"",6 letters,"",1.58,""
+"",7 letters,"",1.56,""
+"",8 letters,"",1.54,""
+"",9 letters,"",1.52,""
+"",10 letters,20/640,1.5,""
+"",11 letters,"",1.48,""
+"",12 letters,"",1.46,""
+"",13 letters,"",1.44,""
+"",14 letters,"",1.42,""
+"",15 letters,20/500,1.4,""
+"",16 letters,"",1.38,""
+"",17 letters,"",1.36,""
+"",18 letters,"",1.34,""
+"",19 letters,"",1.32,""
+"",20 letters,20/400,1.3,""
+"",21 letters,"",1.28,""
+"",22 letters,"",1.26,""
+"",23 letters,"",1.24,""
+"",24 letters,"",1.22,""
+"",25 letters,20/320,1.2,""
+"",26 letters,"",1.18,""
+"",27 letters,"",1.16,""
+"",28 letters,"",1.14,""
+"",29 letters,"",1.12,""
+"",30 letters,20/250,1.1,""
+"",31 letters,"",1.08,""
+"",32 letters,"",1.06,""
+"",33 letters,"",1.04,""
+"",34 letters,"",1.02,""
+"",35 letters,20/200,1,""
+"",36 letters,"",0.98,""
+"",37 letters,"",0.96,""
+"",38 letters,"",0.94,""
+"",39 letters,"",0.92,""
+"",40 letters,20/160,0.9,""
+"",41 letters,"",0.88,""
+"",42 letters,"",0.86,""
+"",43 letters,"",0.84,""
+"",44 letters,"",0.82,""
+"",45 letters,20/125,0.8,""
+"",46 letters,"",0.78,""
+"",47 letters,"",0.76,""
+"",48 letters,"",0.74,""
+"",49 letters,"",0.72,""
+"",50 letters,20/100,0.7,""
+"",51 letters,"",0.68,""
+"",52 letters,"",0.66,""
+"",53 letters,"",0.64,""
+"",54 letters,"",0.62,""
+"",55 letters,20/80,0.6,""
+"",56 letters,"",0.58,""
+"",57 letters,"",0.56,""
+"",58 letters,"",0.54,""
+"",59 letters,"",0.52,""
+"",60 letters,20/63,0.5,""
+"",61 letters,"",0.48,""
+"",62 letters,"",0.46,""
+"",63 letters,"",0.44,""
+"",64 letters,"",0.42,""
+"",65 letters,20/50,0.4,""
+"",66 letters,"",0.38,""
+"",67 letters,"",0.36,""
+"",68 letters,"",0.34,""
+"",69 letters,"",0.32,""
+"",70 letters,20/40,0.3,""
+"",71 letters,"",0.28,""
+"",72 letters,"",0.26,""
+"",73 letters,"",0.24,""
+"",74 letters,"",0.22,""
+"",75 letters,20/32,0.2,""
+"",76 letters,"",0.18,""
+"",77 letters,"",0.16,""
+"",78 letters,"",0.14,""
+"",79 letters,"",0.12,""
+"",80 letters,20/25,0.1,""
+"",81 letters,"",0.08,""
+"",82 letters,"",0.06,""
+"",83 letters,"",0.04,""
+"",84 letters,"",0.02,""
+"",85 letters,20/20,0,""
+"",86 letters,"",-0.02,""
+"",87 letters,"",-0.04,""
+"",88 letters,"",-0.06,""
+"",89 letters,"",-0.08,""
+"",90 letters,20/15,-0.1,""
+"",91 letters,"",-0.12,""
+"",92 letters,"",-0.14,""
+"",93 letters,"",-0.16,""
+"",94 letters,"",-0.18,""
+"",95 letters,20/12,-0.2,""
+"",96 letters,"",-0.22,""
+"",97 letters,"",-0.24,""
+"",98 letters,"",-0.26,""
+"",99 letters,"",-0.28,""
+"",100 letters,20/10,-0.3,""
