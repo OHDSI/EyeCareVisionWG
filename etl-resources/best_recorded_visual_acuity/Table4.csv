@@ -10,4 +10,4 @@ unit_source_value,varchar(50),No,Null
 unit_source_concept_id,integer,No,Null
 value_source_value,varchar(50),No,Source value from EHR (taken verbatim)
 measurement_event_id,integer,No,Null
-meas_event_field_concept_id,integer,No,Null
+meas_event_field_concept_id,integer,No,Test
