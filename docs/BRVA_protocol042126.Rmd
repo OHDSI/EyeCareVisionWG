@@ -1,0 +1,597 @@
+---
+title: "| RESEARCH PROTOCOL\n| \n| ETL Conventions for Best Recorded Visual Acuity (BRVA)\n"
+fontsize: 12pt
+geometry: margin=1in
+output:
+  bookdown::html_document2:
+    df_print: paged
+    toc: yes
+    toc_depth: 2
+    toc_float: yes
+    number_sections: yes
+    number_tables: yes
+    css: style.css
+  bookdown::pdf_document2:
+    keep_tex: yes
+    latex_engine: xelatex
+    md_extensions: +raw_attribute
+    number_sections: yes
+    includes:
+      before_body: title.tex
+  word_document:
+    reference_docx: ohdsi-protocol-style.docx
+header-includes:
+- \usepackage[numbers,sort&compress]{natbib}
+- \usepackage{booktabs}
+- \usepackage{longtable}
+- \usepackage{array}
+- \usepackage{multirow}
+- \usepackage{wrapfig}
+- \usepackage{float}
+- \usepackage{colortbl}
+- \usepackage{pdflscape}
+- \usepackage{tabu}
+- \usepackage{threeparttable}
+- \usepackage{threeparttablex}
+- \usepackage[normalem]{ulem}
+- \usepackage{makecell}
+- \usepackage{caption}
+- \usepackage{rotating}
+- \usepackage{multirow}
+- \usepackage{mwe,tikz}
+- \usepackage[percent]{overpic}
+- \usepackage{enumitem}
+- \usepackage{hyperref}
+- \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+- \newcommand{\footerDate}{`r params$date`}
+- \input{header.tex}
+longtable: yes
+mainfont: Arial
+params:
+  date: '25-Mar-2026'
+  version: 1.0.0
+subtitle: 'Version: `r params$version`'
+link-citations: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE)
+options(kableExtra.latex.load_packages = FALSE)
+library(kableExtra)
+library(dplyr)
+options(knitr.kable.NA = "")
+options(knitr.table.format = function() {
+  if (knitr::is_latex_output()) {
+    "latex"
+  } else if (knitr::is_html_output()) {
+    "html"
+  } else {
+    "pipe"
+  }
+})
+
+latex_table_font_size <- 8
+```
+
+<!-- # TODO List {-} -->
+
+<!-- * Limited PS model -->
+
+# List of Abbreviations
+
+```{r abbreviations, echo=FALSE}
+abbreviations <- readr::read_delim(col_names = FALSE, show_col_types = FALSE, delim = ";", trim_ws = TRUE, file = "
+  ETL; Extract-Transform-Load
+  VA; Visual Acuity
+  BRVA; Best Recorded Visual Acuity
+  OD; Right Eye (Oculus Dexter)
+  OS; Left Eye (Oculus Sinister)
+  OU; Both Eyes (Oculus Uterque)
+  OMOP; Observational Medical Outcomes Partnership
+  CDM; Common Data Model
+  LogMAR; Logarithm (base 10) of the Minimum Angle of Resolution
+  IRIS; Intelligent Research In Sight (American Academy of Ophthalmology)
+  SOURCE; Sight Outcomes Research Collaborative (University of Michigan)
+  PEDIG; Pediatric Eye Disease Investigators Group (Jaeb Center for Health Research)
+  OHSU; Oregon Health Science University
+  INSIGHT; INSIGHT Health Data Research Hub for Eye Health (Moorfields Eye Hospital NHS Foundation Trust)
+  NHS; National Health Service
+  EHR; Electronic Health Record
+  ETDRS; Early Treatment Diabetic Retinopathy Study
+  CF; Count Fingers
+  HM; Hand Motion
+  LP; Light Perception
+  NLP; No Light Perception
+  NEI; National Eye Institute
+  IOP; Intraocular Pressure
+  OHDSI; Observational Health Data Sciences and Informatics
+")
+
+tab <- kable(abbreviations, col.names = NULL, linesep = "", booktabs = TRUE)
+
+if (knitr::is_latex_output()) {
+  tab %>% kable_styling(latex_options = c("striped", "hold_position"), 
+                        font_size = latex_table_font_size)
+} else {
+  tab %>% kable_styling(bootstrap_options = "striped")
+}
+```
+
+# Responsible Parties
+## Investigator
+```{r investigators, echo=FALSE}
+investigators <- readr::read_delim(col_names = TRUE, show_col_types = FALSE, delim = ";", trim_ws = TRUE, file = "
+  Investigator; Institution/Affiliation
+  Cindy Cai; Eye Care and Vision Research Workgroup
+  Kerry Ashby; Eye Care and Vision Research Workgroup
+  Michelle Hribar; Eye Care and Vision Research Workgroup
+  Sally Baxter; Eye Care and Vision Research Workgroup
+  Michael Boland; Eye Care and Vision Research Workgroup
+  Nitin Parikh; Eye Care and Vision Research Workgroup
+  Eric N. Brown; Eye Care and Vision Research Workgroup
+  Robert Gale; Eye Care and Vision Research Workgroup
+  Gayathri Srinivasan; Eye Care and Vision Research Workgroup
+  Shahin Hallaj; Eye Care and Vision Research Workgroup
+  Sophia Wang; Eye Care and Vision Research Workgroup
+  Brian Toy; Eye Care and Vision Research Workgroup
+  Lars Fuhrmann; Eye Care and Vision Research Workgroup
+  Ariel Ong; Eye Care and Vision Research Workgroup
+")
+
+tab <- kable(investigators, booktabs = TRUE, linesep = "") %>%
+  column_spec(1, width = "12em") %>%
+  column_spec(2, width = "25em")
+
+if (knitr::is_latex_output()) {
+  tab %>% kable_styling(latex_options = c("striped", "hold_position"), font_size = latex_table_font_size)
+} else {
+  tab %>% kable_styling(bootstrap_options = "striped")
+}
+```
+## Disclosures
+
+This document is undertaken within the Eye Care and Vision Research Workgroup, specifically the VA OMOP subgroup, as part of the Observational Health Data Sciences and Informatics (OHDSI) community, an open collaboration.
+
+\clearpage
+
+# Abstract
+
+**Background**: Visual acuity (VA) is a fundamental measurement in ophthalmology, critical for assessing patient outcomes after procedures, surgeries, and treatments. However, VA data in electronic health records (EHRs) are often inconsistently documented across different chart types, testing conditions, and institutions. Standardized conventions for extracting, transforming, and loading VA data into the OMOP common data model are needed to enable large-scale ophthalmic research.
+
+**Purpose**: To write out the agreed upon conventions for the extract-load-transform (ETL) of a best recorded visual acuity (BRVA) of the right eye (OD), left eye (OS), and both eyes (OU) into the Observational Medical Outcomes Partnership (OMOP) common data model (CDM).
+
+**Methods**: A landscape survey was conducted across existing ophthalmic registries (IRIS Registry, SOURCE, Epic Cosmos, Cerner/Oracle Health, PEDIG, OHSU, INSIGHT) to review current VA ETL conventions. The proposed BRVA ETL conventions were voted upon by the VA OMOP subgroup and approved by the Eye Care and Vision Research Workgroup.
+
+**Results**: Conventions were established for extraction, transformation (conversion to LogMAR), and loading of BRVA values into the OMOP CDM measurement table. The ETL identifies the "best" recorded VA value (lowest LogMAR) across multiple measures for each eye per visit occurrence.
+
+**Conclusions**: These standardized BRVA ETL conventions support consistent handling of visual acuity data across OMOP-formatted databases, facilitating multi-center ophthalmic research.
+
+
+\clearpage
+
+# Amendments and Updates
+
+```{r amendments, echo=FALSE}
+amendments <- readr::read_delim(col_names = TRUE, show_col_types = FALSE, delim = ";", trim_ws = TRUE, file = "
+  Number; Date; Section of study protocol; Amendment or update; Reason
+  1; 24-August-2025; Initial version; Creation; First version of BRVA ETL conventions document
+  2; 12-October-2025; Transformation Rules; Update; Clarified LogMAR conversion formulas
+  3; 11-December-2025; Edge Cases; Amendment; Added additional edge cases and caveats
+  4; 25-March-2026; Loading Rules; Update; Finalized OMOP CDM field mappings
+")
+
+tab <- kable(amendments, booktabs = TRUE, linesep = "")
+
+if (knitr::is_latex_output()) {
+  tab %>% kable_styling(latex_options = c("striped", "hold_position"), font_size = latex_table_font_size)
+} else {
+  tab %>% kable_styling(bootstrap_options = "striped")
+}
+```
+
+\clearpage
+
+# Process/History
+In early 2025, members of the Eye Care Vision and Research Workgroup, specifically the VA OMOP subgroup, conducted a landscape survey of visual acuity ETL conventions in existing ophthalmic registries, electronic health records (EHRs), and research groups. A survey was conducted across the IRIS Registry (the sole specialty-specific registry, both the academic1 and commercial version managed by Verana Health2), Sight Outcomes Research Collaborative (SOURCE)3 (a consortium of academic medical centers all on Epic sharing de-identified data), Epic Cosmos4 (a dataset created from a community of health centers using Epic), Cerner/Oracle Health5, the Pediatric Eye Disease Investigator Group (PEDIG)6 (a collaborative network funded by the National Eye Institute (NEI) dedicated to facilitating multicenter clinical research in disorders that affect children), a multi-institutional clinical data warehouse in Korea7, Oregon Health Science University (OHSU)8, and the INSIGHT Health Data Research Hub for Eye Health 9 (an NHS-led initiative to make routinely collected eye data available for approved health research) [summary located here](https://ohdsiorg.sharepoint.com/:x:/r/sites/Workgroup-EyeCareVisionResearch/_layouts/15/Doc2.aspx?action=edit&sourcedoc=%7B803bec1e-b463-4bfc-a30d-31459f988e29%7D&wdOrigin=TEAMS-MAGLEV.teamsSdk_ns.rwc&wdExp=TEAMS-TREATMENT&wdhostclicktime=1753277442993&web=1). The proposed BRVA ETL conventions proposed below are in line with existing conventions, voted upon in the VA OMOP subgroup, and approved by the Eye Care and Vision Research Workgroup.
+
+\clearpage
+
+# General Overview of ETL
+
+Visual acuity is a measure of the spatial resolution of the visual processing system and is determined by examining a patient’s ability to distinguish different optotypes (recognizable letters or symbols) on a chart at standard distances.10,11 In addition to the chart and distance, other aspects and the situation under which the vision was measured are important qualifiers in interpreting the results of visual acuity testing. Visual acuity testing is typically performed in each eye separately (OD, OS), and can be tested in both eyes (OU) simultaneously. Figure 1 lists some eye charts, distances, and qualifiers that are commonly encountered in visual acuity testing.
+
+EHRs typically contain the VA testing results for each eye but the details of the VA testing can be poorly documented. For example, Jaeger eye charts are typically used at 14 inches to measure near VA. However, at some institutions, this measurement is recorded in Snellen equivalents without documentation of what eye chart was used or specific distance at which the near VA was tested. Given the current inconsistencies of VA data in the EHR, we sought to create ETL rules that did not introduce erroneous assumptions about the testing conditions. The ETL rules below will identify the “best” recorded VA value (BRVA) across multiple measures for each eye (OD and OS), or the lowest logMAR value, and for both eyes (if measured for both eyes simultaneously, OU). Therefore, each visit occurrence will be associated with at most 3 BRVA measurements.
+
+```{r va-mindmap, echo=FALSE,out.width="100%", fig.align="center"}
+knitr::include_graphics("~/Desktop/Figure1.png")
+```
+
+**Figure 1. Mindmap of selected clinical concepts that may be part of visual acuity tests and resulting data. Note that this is non-exhaustive, and there is a strong variation of which concepts are recorded explicitly depending on clinical setting and EHR. Key Concepts for BRVA ETL marked by grey area **
+
+\clearpage
+
+# Study Objectives
+
+The purpose of this document is to write out the agreed upon conventions for the extract-load-transform (ETL) of a best recorded visual acuity (BRVA) of the right eye (OD), left eye (OS), and both eyes (OU) into the Observational Medical Outcomes Partnership (OMOP) common data model (CDM).
+
+\clearpage
+
+# Research Methods
+
+## Extraction Rules
+
+In EHRs, after VA are obtained from VA testing, the VA data are typically stored as entry values corresponding to fields in a data capture form or user interface that best describes the method of data collection.12 For example, if the distance VA of the right eye was tested using the Snellen chart without correction and without pinhole, a value of 20/20 would be entered in a field named “Dist VA OD sc” (abbreviations and order of the name parts varies).
+
+For research data purposes the entry value will be extracted (ex. 20/20) as will the source variable name (ex. Dist VA OD sc) of the field the entry value corresponds to. Other data such as the eye chart used, or whether or not dilation was used, will not be extracted at this time due to the inconsistency of usage among different medical record systems, eyecare centers, and providers.
+
+Only the Snellen or Snellen equivalent values, Jaeger values, low vision categories, and some pediatric visual acuities will be extracted and transformed at this time. Any other values that cannot be mapped, will receive a value_as_concept_id of 0 and a null in the value_as_number field. The original entry value (ex. 20/20) will be mapped into value_source_value. The source variable name (ex. Dist VA OD sc) will be mapped into measurement_source_value.
+
+\clearpage
+
+## Transformation Rules 
+
+Snellen or Snellen equivalent values, Jaeger values, ETDRS letters, and low vision values will be converted into logMAR (see formula below and Table 2). Furthermore, Jaeger values, and low vision values visual acuities will also be mapped to value_as_concept_id. For now, we are ignoring any pediatric visual acuities.
+
+$\text{LogMAR} = -\log_{10}(\text{Snellen visual acuity as decimal})$
+
+Entry values in the EHR can contain strings in addition to the VA numbers. For example, someone might document “20/20 +2” to indicate that the person read the majority of the 20/20 line and additionally could read 2 additional letters on the 20/15 line. Based on vote by the VA OMOP group (11/14 respondents: 5 voted for letters read, 4 had no opinion, and 2 for including the line only) and the conventions of other ophthalmic registries, we have agreed to ETL both the line as well as any letters read according to the following formula.
+
+$\text{LogMAR} = \text{calculated_logMAR} \pm 0.02 (\text{for each Snellen letter})$
+
+
+**Table 1. Examples of conversions from Snellen to logMAR. Please note, for any source values in Snellen or Snellen-equivalent, please use the above formulas to convert to logMAR**
+```{r,sellen_conversions, echo=FALSE}
+snellen_conversions <- readr::read_delim(col_names = TRUE, show_col_types = FALSE, delim = ";", trim_ws = TRUE, file = "
+  Category; EHR Entry; Snellen Value; LogMAR; value_as_concept_id
+  Snellen / Snellen Equivalent [these are just illustrative examples, please calculate using the formula]; 20/15; 20/15; -0.12; 0
+  ; 20/20; 20/20; 0.00; 0
+  ; 20/25; 20/25; 0.10; 0
+  ; 20/30; 20/30; 0.18; 0
+  ; 20/40; 20/40; 0.30; 0
+  ; 20/50; 20/50; 0.40; 0
+  ; 20/60; 20/60; 0.48; 0
+  ; 20/70; 20/70; 0.54; 0
+  ; 20/80; 20/80; 0.60; 0
+  ; 20/100; 20/100; 0.70; 0
+  ; 20/125; 20/125; 0.80; 0
+  ; 20/150; 20/150; 0.88; 0
+  ; 20/200; 20/200; 1.00; 0
+  ; 20/250; 20/250; 1.10; 0
+  ; 20/300; 20/300; 1.18; 0
+  ; 20/400; 20/400; 1.30; 0
+  ; 20/500; 20/500; 1.40; 0
+  ; 20/600; 20/600; 1.48; 0
+")
+
+tab <- kable(snellen_conversions, booktabs = TRUE, linesep = "", align = c("l", "c", "c", "c", "c")) %>%
+  column_spec(1, width = "12em") %>%
+  column_spec(2, width = "6em") %>%
+  column_spec(3, width = "6em") %>%
+  column_spec(4, width = "5em") %>%
+  column_spec(5, width = "8em") %>%
+  collapse_rows(columns = 1, valign = "top")
+
+if (knitr::is_latex_output()) {
+  tab %>% kable_styling(latex_options = c("striped", "hold_position", "scale_down"), font_size = latex_table_font_size)
+} else {
+  tab %>% kable_styling(bootstrap_options = "striped")
+}
+
+```
+Other forms of visual acuity (Jaeger, ETDRS letters, low vision, pediatrics) should be ETL’d using Table 2.
+
+\clearpage
+
+**Table 2. LogMAR conversions for non-Snellen units**
+```{r, table2_conversions, echo=FALSE}
+table2_conversions <- readr::read_delim(col_names = TRUE, show_col_types = FALSE, delim = ";", trim_ws = TRUE, file = "
+  Category; EHR Entry; Snellen Equivalent (for reference only, not to be used as part of the conversion); LogMAR; value_as_concept_id
+  Jaeger; J1+; 20/15; -0.12; 37017022
+  ; J1; 20/20; 0.00; 4126536
+  ; J2; 20/25; 0.10; 4125414
+  ; J3; 20/30; 0.18; 46273339
+  ; J4; 20/32; 0.20; 4126537
+  ; J5; 20/40; 0.30; 46274009
+  ; J6; 20/50; 0.40; 4126538
+  ; J7; 20/60; 0.48; 46273340
+  ; J8; 20/63; 0.50; 4125415
+  ; J9; 20/80; 0.60; 46273342
+  ; J10; 20/100; 0.70; 4123481
+  ; J11; 20/114; 0.76; 46273344
+  ; J12; 20/125; 0.80; 4128621
+  ; J13; 20/160; 0.90; 46273345
+  ; J14; 20/200; 1.00; 4125413
+  Low vision; CF; NA; 1.9; 36308523
+  ; HM; NA; 2.3; 36309751
+  ; LP; NA; 2.7; 36309496
+  ; NLP; NA; 4.0; 36307763
+  ETDRS Letter score; 0 letters; NA; NA; 
+  ; 1 letters; ; 1.68; 
+  ; 2 letters; ; 1.66; 
+  ; 3 letters; ; 1.64; 
+  ; 4 letters; ; 1.62; 
+  ; 5 letters; 20/800; 1.60; 
+  ; 6 letters; ; 1.58; 
+  ; 7 letters; ; 1.56; 
+  ; 8 letters; ; 1.54; 
+  ; 9 letters; ; 1.52; 
+  ; 10 letters; 20/640; 1.50; 
+  ; 11 letters; ; 1.48; 
+  ; 12 letters; ; 1.46; 
+  ; 13 letters; ; 1.44; 
+  ; 14 letters; ; 1.42; 
+  ; 15 letters; 20/500; 1.40; 
+  ; 16 letters; ; 1.38; 
+  ; 17 letters; ; 1.36; 
+  ; 18 letters; ; 1.34; 
+  ; 19 letters; ; 1.32; 
+  ; 20 letters; 20/400; 1.30; 
+  ; 21 letters; ; 1.28; 
+  ; 22 letters; ; 1.26; 
+  ; 23 letters; ; 1.24; 
+  ; 24 letters; ; 1.22; 
+  ; 25 letters; 20/320; 1.20; 
+  ; 26 letters; ; 1.18; 
+  ; 27 letters; ; 1.16; 
+  ; 28 letters; ; 1.14; 
+  ; 29 letters; ; 1.12; 
+  ; 30 letters; 20/250; 1.10; 
+  ; 31 letters; ; 1.08; 
+  ; 32 letters; ; 1.06; 
+  ; 33 letters; ; 1.04; 
+  ; 34 letters; ; 1.02; 
+  ; 35 letters; 20/200; 1.00; 
+  ; 36 letters; ; 0.98; 
+  ; 37 letters; ; 0.96; 
+  ; 38 letters; ; 0.94; 
+  ; 39 letters; ; 0.92; 
+  ; 40 letters; 20/160; 0.90; 
+  ; 41 letters; ; 0.88; 
+  ; 42 letters; ; 0.86; 
+  ; 43 letters; ; 0.84; 
+  ; 44 letters; ; 0.82; 
+  ; 45 letters; 20/125; 0.80; 
+  ; 46 letters; ; 0.78; 
+  ; 47 letters; ; 0.76; 
+  ; 48 letters; ; 0.74; 
+  ; 49 letters; ; 0.72; 
+  ; 50 letters; 20/100; 0.70; 
+  ; 51 letters; ; 0.68; 
+  ; 52 letters; ; 0.66; 
+  ; 53 letters; ; 0.64; 
+  ; 54 letters; ; 0.62; 
+  ; 55 letters; 20/80; 0.60; 
+  ; 56 letters; ; 0.58; 
+  ; 57 letters; ; 0.56; 
+  ; 58 letters; ; 0.54; 
+  ; 59 letters; ; 0.52; 
+  ; 60 letters; 20/63; 0.50; 
+  ; 61 letters; ; 0.48; 
+  ; 62 letters; ; 0.46; 
+  ; 63 letters; ; 0.44; 
+  ; 64 letters; ; 0.42; 
+  ; 65 letters; 20/50; 0.40; 
+  ; 66 letters; ; 0.38; 
+  ; 67 letters; ; 0.36; 
+  ; 68 letters; ; 0.34; 
+  ; 69 letters; ; 0.32; 
+  ; 70 letters; 20/40; 0.30; 
+  ; 71 letters; ; 0.28; 
+  ; 72 letters; ; 0.26; 
+  ; 73 letters; ; 0.24; 
+  ; 74 letters; ; 0.22; 
+  ; 75 letters; 20/32; 0.20; 
+  ; 76 letters; ; 0.18; 
+  ; 77 letters; ; 0.16; 
+  ; 78 letters; ; 0.14; 
+  ; 79 letters; ; 0.12; 
+  ; 80 letters; 20/25; 0.10; 
+  ; 81 letters; ; 0.08; 
+  ; 82 letters; ; 0.06; 
+  ; 83 letters; ; 0.04; 
+  ; 84 letters; ; 0.02; 
+  ; 85 letters; 20/20; 0.00; 
+  ; 86 letters; ; -0.02; 
+  ; 87 letters; ; -0.04; 
+  ; 88 letters; ; -0.06; 
+  ; 89 letters; ; -0.08; 
+  ; 90 letters; 20/15; -0.10; 
+  ; 91 letters; ; -0.12; 
+  ; 92 letters; ; -0.14; 
+  ; 93 letters; ; -0.16; 
+  ; 94 letters; ; -0.18; 
+  ; 95 letters; 20/12; -0.20; 
+  ; 96 letters; ; -0.22; 
+  ; 97 letters; ; -0.24; 
+  ; 98 letters; ; -0.26; 
+  ; 99 letters; ; -0.28; 
+  ; 100 letters; 20/10; -0.30; 
+")
+
+tab <- kable(table2_conversions, booktabs = TRUE, linesep = "", align = c("l", "l", "c", "c", "c")) %>%
+  column_spec(1, width = "8em") %>%
+  column_spec(2, width = "6em") %>%
+  column_spec(3, width = "12em") %>%
+  column_spec(4, width = "5em") %>%
+  column_spec(5, width = "8em") %>%
+  collapse_rows(columns = 1, valign = "top")
+
+if (knitr::is_latex_output()) {
+  tab %>% kable_styling(latex_options = c("striped", "hold_position", "scale_down"), font_size = latex_table_font_size)
+} else {
+  tab %>% kable_styling(bootstrap_options = "striped")
+}
+
+```
+Additional strings might appear to denote the distance at which a VA of HM was obtained, for example “HM at 2 feet”. By convention, we will drop any text descriptions from the calculation of the logMAR. Other examples of how VA data are parsed can be found in Table 3.
+
+\clearpage
+
+**Table 3. EHR parsing and data clearning**
+```{r, table3_parsing, echo=FALSE}
+table3_parsing <- readr::read_delim(col_names = TRUE, show_col_types = FALSE, delim = ";", trim_ws = TRUE, file = "
+  EHR Entry; Extracted Value; Plus letter; LogMAR; value_as_concept_id; Comments
+  20/30 +2 -1; 20/30; +2, -1; 0.22; ; Computed as 0.18 for 20/30 plus 0.04 for the '+1' (sum of +2 and -1)
+  6/6; 6/6; ; 0; ; 
+  J2+2; J2; ; 0.10; 4125414; Drop the +2 for Jaeger
+  20/200 at 2 feet; 20/200; ; 1; ; Drop the 'at 2 feet'
+  LP with projection; LP; ; 2.7; 36309496; Drop the 'with projection'
+")
+
+tab <- kable(table3_parsing, booktabs = TRUE, linesep = "", align = c("l", "l", "c", "c", "c", "l")) %>%
+  column_spec(1, width = "8em") %>%
+  column_spec(2, width = "6em") %>%
+  column_spec(3, width = "5em") %>%
+  column_spec(4, width = "4em") %>%
+  column_spec(5, width = "7em") %>%
+  column_spec(6, width = "14em")
+
+if (knitr::is_latex_output()) {
+  tab %>% kable_styling(latex_options = c("striped", "hold_position", "scale_down"), font_size = latex_table_font_size)
+} else {
+  tab %>% kable_styling(bootstrap_options = "striped")
+}
+
+```
+After conversion of values to logMAR, the smallest logMAR (corresponding to the best possible recorded visual acuity), regardless of testing method (at distance or near, with or without pinhole, etc), for a given office visit will be selected for loading into the OMOP CDM (next step).
+
+\clearpage
+
+## Loading Rules:
+The VA in logMAR will be stored in the measurement table in the OMOP CDM following the standards previously set by the ETL of intraocular pressure data.13 Of note, the main measure of LogMAR is not a unit of measure but a mathematical conversion (see formula above).
+
+**Table 4. Loading rules of BRVA into the OMOP CDM v5.4**
+```{r, table4_loading, echo=FALSE}
+table4_loading <- data.frame(
+  `CDM Field` = c(
+    "measurement_concept_id",
+    "measurement_type_concept_id",
+    "value_as_number",
+    "value_as_concept_id",
+    "unit_concept_id",
+    "measurement_source_value",
+    "measurement_source_concept_id",
+    "unit_source_value",
+    "unit_source_concept_id",
+    "value_source_value",
+    "measurement_event_id",
+    "meas_event_field_concept_id"
+  ),
+  Datatype = c(
+    "integer",
+    "integer",
+    "float",
+    "integer",
+    "integer",
+    "varchar(50)",
+    "integer",
+    "varchar(50)",
+    "integer",
+    "varchar(50)",
+    "integer",
+    "integer"
+  ),
+  Required = c(
+    "Yes",
+    "Yes",
+    "No",
+    "No",
+    "No",
+    "No",
+    "No",
+    "No",
+    "No",
+    "No",
+    "No",
+    "No"
+  ),
+  Proposal = c(
+    "723167 for BRVA OD chart agnostic, letters read, distance or near, with or without pinhole\n\n723168 for BRVA OS chart agnostic, letters read, distance or near, with or without pinhole\n\n723169 for BRVA OU chart agnostic, letters read, distance or near, with or without pinhole",
+    "32817 (for EHR, same as for IOP ETL)",
+    "Converted to LogMAR (described in the Transformation Rules section)",
+    "Add value_as_concept_id for the low vision values and Jaeger values (see Table 2)\n\nSet to 0 if none of the above",
+    "Null",
+    "Source field name from EHR (for example in Epic 'VA OD SC Dist PH: CUI...' but in Cerner would be 2 field names)",
+    "Null",
+    "Null",
+    "Null",
+    "Source value from EHR (taken verbatim)",
+    "Null",
+    "Null"
+  ),
+  check.names = FALSE
+)
+
+tab <- kable(table4_loading, booktabs = TRUE, linesep = "", align = c("l", "l", "c", "l"), escape = FALSE) %>%
+  column_spec(1, width = "12em") %>%
+  column_spec(2, width = "6em") %>%
+  column_spec(3, width = "4em") %>%
+  column_spec(4, width = "22em")
+
+if (knitr::is_latex_output()) {
+  tab %>% 
+    kable_styling(latex_options = c("striped", "hold_position", "scale_down"), font_size = latex_table_font_size) %>%
+    column_spec(4, width = "22em", latex_valign = "t")
+} else {
+  # For HTML, replace \n\n with <br><br>
+  table4_loading$Proposal <- gsub("\n\n", "<br><br>", table4_loading$Proposal)
+  kable(table4_loading, booktabs = TRUE, linesep = "", align = c("l", "l", "c", "l"), escape = FALSE) %>%
+    column_spec(1, width = "12em") %>%
+    column_spec(2, width = "6em") %>%
+    column_spec(3, width = "4em") %>%
+    column_spec(4, width = "22em") %>%
+    kable_styling(bootstrap_options = "striped")
+}
+```
+
+\clearpage
+
+## Supported Use Cases
+
+- Visual acuity outcomes in a specific eye after procedures or surgeries.
+
+\clearpage
+
+## Edge cases/Assumptions/Caveats:
+
+- **Chart Agnostic**: Just because Snellen equivalent VA is documented it does not necessarily mean that the Snellen chart was used to measure the vision. For example, at some institutions, near visual acuity is measured with the Jaeger near card, and recorded using Snellen equivalents. Because we cannot assume chart type, and chart type is often undocumented, we decided not to include chart type in this initial ETL of VA.
+
+- **Pinhole Visual Acuity**: Pinhole visual acuity does not necessarily reflect VA achievable with refractive correction. There is robust debate among the WG and in the literature regarding whether pinhole VA should be used to reflect BRVA. In this current version of BRVA, we are including pinhole vision, but future iterations of the BRVA definition can exclude it for the researchers who do not want to use pinhole vision. For those researchers needing further specificity, it’s possible that the measurement_source_value field, which stores the provenance, may indicate whether a pinhole VA was used.
+
+- **Letters read or line only**: Typically, during routine measures of VA, the patient is asked to  read the smallest line on the VA chart and if the patient is able to read more than half the letters on that line, then that is the VA recorded. Any letters on that line that the patient misses is recorded as minus values, and any letters of an even smaller line that they are able to read are recorded as plus values. So for example, if a patient is able to read ⅗ letters on the 20/20 line and 1 letter on the 20/15 line, this would be recorded as 20/20 -2. +1. However, this standard method of measuring VA is practiced variably (even at a given institution). Furthermore, on the Snellen chart, each line includes a different number of possible letters. Thus, there was debate among the group whether to include the letters read in the calculation of the logMAR visual acuity. Some databases, for example IRIS Registry and SOURCE, leverage the letters in the calculation of logMAR but others like INSIGHT do not. A vote was instituted, and the majority of the group voted to ETL the number of letters read (in addition to the line), rather than just considering the line and ignoring the letters missed or read. However, users of the transformed data should not assume that the LogMAR value implies the exact number of letters that a person read on the chart, i.e. they might have read extra letters on another row and the provider did not record them.
+
+- **Conversion to LogMAR**: For now, only values recorded in Snellen or Snellen equivalents, Jaeger values, low vision VA, ETDRS Letter score and some pediatric VA values are converted into LogMAR or value_as_concept_id. At present, any VA recorded which is not resolvable to something in the list, is given a value_as_concep_id of 0 and the raw value included in value_source_value. Work is underway to resolve more values to LogMAR or value_as_concept_id.
+
+- **Strings included with VA**: Sometimes, visual acuities are recorded with a string that provides more detail on the VA. This is particularly relevant for low vision values (e.g., HM at 2 feet). In this current ETL definition, the distance at which the HM vision is measured is not converted into LogMAR, and this is also the choice made by the IRIS Registry and SOURCE). In other databases, the distance is taken into account in the conversion of the low vision VA into LogMAR (for example, Cerner and OHSU). If researchers need the string, this will be included in value_source_value. However, users should note that the string could be masked by the institution during the de-identification process. Users should check with institutional policy before performing studies using value_source_value.
+
+- **Jaeger Notation**: There are conflicting conversions from Jaeger notation, which is often used to document near VA, into Snellen equivalents.15,16 For example, some convert J1+ to 20/20, and others convert it to 20/15 (and J1 is 20/20). To further complicate the issue, some near charts similarly use J1+ as 20/20 but others J1. Please note that we chose the above conversion for Jaeger (Table 2), which is also the conversion that Epic Cosmos uses. But due to these known issues, there is imprecision in using VA when documented in Jaeger notation. It is also possible that an institution or provider may record a Snellen equivalent acuity initially rather than recording in Jaeger notation (as mentioned above in “Chart Agnostic”).
+
+- **Low Vision Values**: Because we are dropping the distance at which low vision values are measured, we are losing granularity and introducing potential small errors. For example 20/200 at 2 feet is converted to 20/200 but in reality should be 2/200. And for example, CF at 3 feet is better vision than CF at face, but they both get converted to the same logMAR. Users that use low vision values should be aware of these issues.
+
+- **ETDRS letter score**: The ETDRS study has coined the name of a specific set of logMAR charts originally described by Ferris et al19, and a specific scoring process which we will refer to as the ETDRS Letter Score. It is typically used in clinical trials to measure visual acuity (particularly in retina) by counting the number of letters read correctly on the chart until a whole line is missed. The current conversion in the table above assumes that the ETDRS letter score was obtained using the protocol as described in the original ETDRS clinical trials.20 
+
+Generally, in logMAR charts the difference between each line is equivalent to 0.1 logMAR, and each line contains 5 letters. For a conversion of the number of letters read on such a chart to logMAR notation it is necessary to know the logMAR value of the starting line. In the ETDRS study, and hence this ETL conversions, it is assumed that the starting line (and thereby the first five “letters read”) are a line equivalent to a VA of 20/800, or 1.6 logMAR. This is achieved by starting to count the “letters read” not from the top line of the chart at 4m distance,  which would be 20/200 if displayed at 4m distance,  but at at distance of 1m, where its visual angle is equivalent to 20/800, or 1.6 LogMAR (200ft*(4m/1m)=800ft). Conversion to logMAR is generally calculated as:
+
+<p style="font-size: 1.5em; font-style: italic;">VA in logMAR = starting line value + 0.1 - (0.02 × Number of letters read)</p>
+
+<p style="font-size: 1.2em;">And specifically in the case of the ETDRS letter score:</p>
+
+<p style="font-size: 1.5em; font-style: italic;">VA in logMAR = 1.6 + 0.1 - (0.02 × ETDRS Letter score)</p>
+
+This conversion follows the conventions of both electronic ETDRS testing and the ISO norms.21,22 Due to potential variability in scoring methods, charts or testing distances the “letters read” scoring procedure in a specific healthcare setting needs to be ascertained before conversion rules to logMAR are set for a given dataset. The conversion table above can only be used if the scoring protocol of the ETDRS study was followed, i.e. starting line value equivalent to 1.6 logMAR. If the scoring protocol of the ETDRS study was not followed, the general formula above can be used.
+
+- **Pediatric Visual Acuity**: Pediatric visual acuity (e.g., fix and follow) is not currently part of this ETL process. The details and rules of how to ETL pediatric visual acuity is the subject of ongoing [work](https://docs.google.com/document/d/1oKfg6wgvIfeROJp9M22TZ6Yjf5XUevkmTqfojMneAY8/edit?tab=t.0) and will be further detailed by the Pediatric Subgroup in the Eye Care and Vision Research Workgroup.
+
+\clearpage
+
+## Known Site Specific ETL Implementation Issues
+
+- **Epic and ETDRS letters**: Other groups (specifically, SOURCE) have attempted to ETL ETDRS from the Epic EHR but due to a high false positive rate, the conversion of ETDRS letters into LogMAR was never implemented. This is likely because there is no explicit and specific location to document the recording of ETDRS letters, since the current documentation is optimized for the recording of Snellen and Snellen-equivalent VA. As such, the ETL of ETDRS letters into LogMAR will not be implemented at Epic sites.
+    - Details about the Epic BRVA ETL process can be located in the following document: [BRVA ETL Process for Epic](https://docs.google.com/document/d/1-ck2ck1gvwLb4KMPugu02nWDm8_EINJUB3K2Wz2Li30/edit?tab=t.0)
+    - The link for the ETL script developed at Bascom Palmer (by Nitin Parikh) will be uploaded to the Epic UserWeb and linked here when complete.
+
+\clearpage
+
+## Considerations for Future Development:
+- **Alterations in the definition of BRVA**: for example, a definition that is specific to the chart (especially for data sources like prospective studies where chart type and other details of how the VA was recorded are meticulously included in the data), or excluding pinhole visual acuity, or including only lines measured (and ignoring the letters). Each future definition will reside in a new concept name that includes the details of the ETL decisions (for example, BRVA OD chart specified, line only, distance only, no pinhole).
+\clearpage
