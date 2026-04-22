@@ -1,0 +1,13 @@
+CDM Field,Datatype,Required,Proposal
+measurement_concept_id,integer,Yes,"723167 for BRVA OD chart agnostic, letters read, distance or near, with or without pinhole; 723168 for BRVA OS chart agnostic, letters read, distance or near, with or without pinhole; 723169 for BRVA OU chart agnostic, letters read, distance or near, with or without pinhole"
+measurement_type_concept_id,integer,Yes,"32817 (for EHR, same as for IOP ETL)"
+value_as_number,float,No,Converted to LogMAR (described in the Transformation Rules section)
+value_as_concept_id,integer,No,"Add value_as_concept_id for the low vision values and Jaeger values (see Table 2); Set to 0 if none of the above"
+unit_concept_id,integer,No,Null
+measurement_source_value,varchar(50),No,"Source field name from EHR (for example in Epic VA OD SC Dist PH: CUI... but in Cerner would be 2 field names)"
+measurement_source_concept_id,integer,No,Null
+unit_source_value,varchar(50),No,Null
+unit_source_concept_id,integer,No,Null
+value_source_value,varchar(50),No,Source value from EHR (taken verbatim)
+measurement_event_id,integer,No,Null
+meas_event_field_concept_id,integer,No,Null
