@@ -1,0 +1,40 @@
+name: Render RMarkdown
+
+on:
+  push:
+    paths:
+      - 'etl-resources/best_recorded_visual_acuity/*.csv'
+      - '*.Rmd'
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+      
+      - name: Setup Pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+      
+      - name: Install R packages
+        run: |
+          install.packages(c("rmarkdown", "knitr", "kableExtra", "readr", "dplyr", "bookdown"))
+        shell: Rscript {0}
+      
+      - name: Render RMarkdown
+        run: |
+          rmarkdown::render("BRVA_protocol042126.Rmd", output_format = "bookdown::html_document2")
+        shell: Rscript {0}
+      
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add -A
+          git commit -m "Auto-render RMarkdown after CSV update" || echo "No changes to commit"
+          git push
