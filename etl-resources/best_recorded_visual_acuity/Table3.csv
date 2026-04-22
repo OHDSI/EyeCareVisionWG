@@ -1,0 +1,6 @@
+EHR Entry	Extracted Value	Plus letter	LogMAR	value_as_concept_id	Comments
+20/30 +2 -1	20/30	+2, -1	0.22		Computed as 0.18 for 20/30 plus 0.04 for the “+1” (sum of +2 and -1)
+6/6	6/6		0		
+J2+2	J2		0.10	4125414	Drop the +2 for Jaeger
+20/200 at 2 feet	20/200		1		Drop the “at 2 feet”
+LP with projection	LP		2.7	36309496	Drop the “with projection”
