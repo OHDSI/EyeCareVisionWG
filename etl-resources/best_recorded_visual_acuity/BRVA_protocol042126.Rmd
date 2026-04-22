@@ -1,0 +1,14 @@
+Copy code
+EyeCareVisionWG/
+├── .github/
+│   └── workflows/
+│       └── render-rmarkdown.yml
+├── etl-resources/
+│   └── best_recorded_visual_acuity/
+│       ├── BRVA_protocol042126.Rmd
+│       ├── Table1.csv
+│       ├── Table2.csv
+│       ├── Table3.csv
+│       ├── Table4.csv
+│       ├── style.css (if needed)
+│       └── Figure1.png (if needed)
