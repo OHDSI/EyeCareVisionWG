@@ -1,4 +1,4 @@
-name: Render RMarkdown to HTML
+name: Render RMarkdown and Deploy
 
 on:
   push:
@@ -15,6 +15,8 @@ jobs:
     
     permissions:
       contents: write
+      pages: write
+      id-token: write
     
     steps:
       - name: Checkout repository
@@ -35,7 +37,7 @@ jobs:
       
       - name: Install R packages
         run: |
-          install.packages(c("rmarkdown", "knitr", "kableExtra", "readr", "dplyr", "bookdown"))
+          install.packages(c("rmarkdown", "knitr", "kableExtra", "readr", "dplyr", "bookdown", "httr"))
         shell: Rscript {0}
       
       - name: Render RMarkdown
@@ -43,7 +45,7 @@ jobs:
           rmarkdown::render(
             "etl-resources/best_recorded_visual_acuity/BRVA_protocol042126.Rmd",
             output_format = "bookdown::html_document2",
-            output_file = "BRVA_protocol.html"
+            output_file = "BRVA_protocol042126.html"
           )
         shell: Rscript {0}
       
@@ -54,3 +56,33 @@ jobs:
           git add -A
           git commit -m "Auto-render HTML after CSV/Rmd update" || echo "No changes to commit"
           git push
+
+  deploy:
+    needs: render
+    runs-on: ubuntu-latest
+    
+    permissions:
+      pages: write
+      id-token: write
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'etl-resources/best_recorded_visual_acuity'
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
