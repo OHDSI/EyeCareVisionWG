@@ -3,7 +3,7 @@ Visual acuity (VA) is a critical measure for assessing outcomes in ophthalmology
 
 -Study lead forums tag:
 **[[Cindy X. Cai]](https://forums.ohdsi.org/u/cindyxcai)**
-**[[Michelle Hribar](https://forums.ohdsi.org/u/hribar)**
+**[[Michelle Hribar](https://forums.ohdsi.org/u/hribarm)**
 
 ## BRVA ETL Documentation
 [Link](https://ohdsi.github.io/EyeCareVisionWG/BRVA_protocol042126.html)
