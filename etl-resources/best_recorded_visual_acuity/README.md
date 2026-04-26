@@ -20,7 +20,7 @@ Please see document for additional Study members
 [Link forthcoming]
 
 ## Epic Userweb Post
-[Link forthcoming]
+[Link to Epic Userweb](https://userweb.epic.com/Thread/147813/Kaleidoscope-to-OMOP-ETL-for-a-Best-Recorded-Visual-Acuity-B/)
 
 ## Publications
 [Forthcoming]
