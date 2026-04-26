@@ -16,7 +16,7 @@ Please see document for additional Study members
 ## BRVA ETL Documentation
 [HTML Document](https://ohdsi.github.io/EyeCareVisionWG/BRVA_protocol042126.html)
 
-## Themis Convention
+## THEMIS Convention
 [Link forthcoming]
 
 ## Epic Userweb Post
