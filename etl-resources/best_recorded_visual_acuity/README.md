@@ -17,7 +17,8 @@ Please see document for additional Study members
 [HTML Document](https://ohdsi.github.io/EyeCareVisionWG/BRVA_protocol042126.html)
 
 ## THEMIS Convention
-[Link forthcoming]
+[Link to final convention forthcoming]
+[Link to THEMIS issue](https://github.com/OHDSI/Themis/issues/210)
 
 ## Epic Userweb Post
 [Link to Epic Userweb](https://userweb.epic.com/Thread/147813/Kaleidoscope-to-OMOP-ETL-for-a-Best-Recorded-Visual-Acuity-B/)
