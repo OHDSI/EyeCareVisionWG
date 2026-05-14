@@ -48,7 +48,6 @@ header-includes:
 longtable: yes
 mainfont: Arial
 params:
-  date: '25-Mar-2026'
   version: 1.0.0
 subtitle: 'Version: `r params$version`'
 link-citations: yes
@@ -178,6 +177,7 @@ amendments <- readr::read_delim(col_names = TRUE, show_col_types = FALSE, delim 
   2; 12-October-2025; Transformation Rules; Update; Clarified LogMAR conversion formulas
   3; 11-December-2025; Edge Cases; Amendment; Added additional edge cases and caveats
   4; 25-March-2026; Loading Rules; Update; Finalized OMOP CDM field mappings
+  5; 14-May-2026; Editing and protocol updates; Update; Revised protocol language and refined ETL conventions with additional implementation clarifications
 ")
 
 tab <- kable(amendments, booktabs = TRUE, linesep = "")
@@ -233,11 +233,11 @@ Only the Snellen or Snellen equivalent values, Jaeger values, low vision categor
 
 Snellen or Snellen equivalent values, Jaeger values, ETDRS letters, and low vision values will be converted into logMAR (see formula below and Table 2). Furthermore, Jaeger values, and low vision values visual acuities will also be mapped to value_as_concept_id. For now, we are ignoring any pediatric visual acuities.
 
-$\text{LogMAR} = -\log_{10}(\text{Snellen visual acuity as decimal})$
+calculated_$\text{LogMAR} = -\log_{10}(\text{Snellen visual acuity as decimal})$
 
 Entry values in the EHR can contain strings in addition to the VA numbers. For example, someone might document “20/20 +2” to indicate that the person read the majority of the 20/20 line and additionally could read 2 additional letters on the 20/15 line. Based on vote by the VA OMOP group (11/14 respondents: 5 voted for letters read, 4 had no opinion, and 2 for including the line only) and the conventions of other ophthalmic registries, we have agreed to ETL both the line as well as any letters read according to the following formula.
 
-$\text{LogMAR} = \text{calculated_logMAR} \pm 0.02 (\text{for each Snellen letter})$
+$\text{LogMAR} = \text{calculated_logMAR} - 0.02 (\text{for each Snellen letter read})$
 
 ##### [Table 1](https://github.com/OHDSI/EyeCareVisionWG/blob/main/etl-resources/best_recorded_visual_acuity/Table1.csv). Examples of conversions from Snellen to logMAR {-}
 
@@ -340,6 +340,8 @@ if (knitr::is_latex_output()) {
 }
 
 ```
+After conversion of values to logMAR, the lowest logMAR (corresponding to the best possible recorded visual acuity) for each eye-level (OD/OS/OU), regardless of testing method (at distance or near, with or without pinhole, etc), for a given office visit will be selected for loading into the OMOP CDM (next step).
+
 \clearpage
 
 
@@ -418,6 +420,8 @@ This conversion follows the conventions of both electronic ETDRS testing and the
 - **Epic and ETDRS letters**: Other groups (specifically, SOURCE) have attempted to ETL ETDRS from the Epic EHR but due to a high false positive rate, the conversion of ETDRS letters into LogMAR was never implemented. This is likely because there is no explicit and specific location to document the recording of ETDRS letters, since the current documentation is optimized for the recording of Snellen and Snellen-equivalent VA. As such, the ETL of ETDRS letters into LogMAR will not be implemented at Epic sites.
     - Details about the Epic BRVA ETL process can be located in the following document: [BRVA ETL Process for Epic](https://docs.google.com/document/d/1-ck2ck1gvwLb4KMPugu02nWDm8_EINJUB3K2Wz2Li30/edit?tab=t.0)
     - The link for the ETL script developed at Bascom Palmer (by Nitin Parikh) will be uploaded to the Epic UserWeb and linked here when complete.
+
+- **Epic and concatenation of line and letters read**: In Epic, the Snellen line and letters read are typically stored in separate Smart data element fields. For example, if the right eye for a patient reads 20/40 +2, the 20/40 is stored in one location and the +2 another location. During the ETL process, these lines need to be matched up. Furthermore, if there are multiple measurements for the right eye, they will exist in a separate row. If there is another measurement for the right eye that reads 20/50 +3, that will exist as a separate line in Epic Clarity. During the ETL process, it will be important to match the +2 to the 20/40 and the +3 to 20/50. Also keep in mind, depending on the documentation patterns of the providers, some might write 20/40+2 in the same text box in which case both the line and letters read will show up in a single Smart data element field.
 
 \clearpage
 
