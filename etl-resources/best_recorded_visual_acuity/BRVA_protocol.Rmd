@@ -48,7 +48,7 @@ header-includes:
 longtable: yes
 mainfont: Arial
 params:
-  date: '25-Mar-2026'
+  date: '14-May-2026'
   version: 1.0.0
 subtitle: 'Version: `r params$version`'
 link-citations: yes
@@ -233,11 +233,11 @@ Only the Snellen or Snellen equivalent values, Jaeger values, low vision categor
 
 Snellen or Snellen equivalent values, Jaeger values, ETDRS letters, and low vision values will be converted into logMAR (see formula below and Table 2). Furthermore, Jaeger values, and low vision values visual acuities will also be mapped to value_as_concept_id. For now, we are ignoring any pediatric visual acuities.
 
-$\text{LogMAR} = -\log_{10}(\text{Snellen visual acuity as decimal})$
+$\text{calculated_LogMAR} = -\log_{10}(\text{Snellen visual acuity as decimal})$
 
 Entry values in the EHR can contain strings in addition to the VA numbers. For example, someone might document “20/20 +2” to indicate that the person read the majority of the 20/20 line and additionally could read 2 additional letters on the 20/15 line. Based on vote by the VA OMOP group (11/14 respondents: 5 voted for letters read, 4 had no opinion, and 2 for including the line only) and the conventions of other ophthalmic registries, we have agreed to ETL both the line as well as any letters read according to the following formula.
 
-$\text{LogMAR} = \text{calculated_logMAR} \pm 0.02 (\text{for each Snellen letter})$
+$\text{LogMAR} = \text{calculated_logMAR} \m 0.02 (\text{for each Snellen letter read})$
 
 ##### [Table 1](https://github.com/OHDSI/EyeCareVisionWG/blob/main/etl-resources/best_recorded_visual_acuity/Table1.csv). Examples of conversions from Snellen to logMAR {-}
 
